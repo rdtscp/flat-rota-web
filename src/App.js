@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import Landing from './Views/Landing';
-import Login from './Views/Login';
+import LandingPage from './Views/LoadingPage';
+import LoginPage from './Views/LoginPage';
+import HomePage from './Views/HomePage';
 
 class App extends Component {
 
@@ -25,18 +26,18 @@ class App extends Component {
         authenticated: authenticated,
         token: token
       })
-    }, 1000);
+    }, 2000);
   }
 
   render = () => {
     if (this.state.loading) {
-      return(<Landing/>);
+      return(<LandingPage/>);
     }
     else if (this.state.authenticated) {
-      return (<Home/>);
+      return (<HomePage/>);
     }
     else {
-      return (<Login/>);
+      return (<LoginPage/>);
     }
   } 
 
