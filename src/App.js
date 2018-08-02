@@ -3,43 +3,45 @@ import React, { Component } from 'react';
 import LandingPage from './Views/LoadingPage';
 import LoginPage from './Views/LoginPage';
 import HomePage from './Views/HomePage';
+import network from './Resources/networkHelper';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      authenticated: false,
-      token: null
-    };
-  }
-
-  componentDidMount = () => {
-    var token = localStorage.getItem('token');
-
-    /* Simulate a Network Request Checking Authenticity */
-    setTimeout(() => {
-      let authenticated = Math.floor(Math.random() * 1);
-      this.setState({
-        loading: false,
-        authenticated: authenticated,
-        token: token
-      })
-    }, 2000);
-  }
-
-  render = () => {
-    if (this.state.loading) {
-      return(<LandingPage/>);
+    constructor(props) {
+      super(props);
+      this.state = {
+        loading: true,
+        authenticated: false,
+        token: null
+      };
     }
-    else if (this.state.authenticated) {
-      return (<HomePage/>);
+
+    /* On Component Mount, set state according to authToken status. */
+    componentDidMount = () => {
+      var localAuthToken = localStorage.getItem('authToken');
+
+      /* Check with backend if the token provides authentication. */
+      network.isAuthorised(localAuthToken, (authStatus) => {
+        // Set state appropriately.
+        this.setState({
+          loading: false,
+          authenticated: authStatus,
+          token: localAuthToken
+        });
+      });
     }
-    else {
-      return (<LoginPage/>);
-    }
-  } 
+
+    render = () => {
+      if (this.state.loading) {
+        return(<LandingPage/>);
+      }
+      else if (this.state.authenticated) {
+        return (<HomePage/>);
+      }
+      else {
+        return (<LoginPage />);
+      }
+    } 
 
 }
 
