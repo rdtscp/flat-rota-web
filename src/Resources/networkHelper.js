@@ -1,28 +1,31 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 
 const network = {
 
-    isAuthorised: function(cb) {
+    /* @TODO: Checks if the local authentication token is valid. */
+    isAuthorised: function(localToken, cb) {
         return (
-            cb(true)
+            setTimeout(() => {
+                cb(false);
+            }, 2000)
         );
     },
 
-    // Gets a CSRF token from API, and returns it in a callback.
-    getCSRF: function(cb) {
-        return (
-            axios({
-                method:'GET',
-                url:'https://localhost:3000',
-                withCredentials: true,
-                contentType: 'json',
-            })
-            .then((response) => {
-                return cb(response.data._csrf);
-            })
-        );
-    },
+    // // Gets a CSRF token from API, and returns it in a callback.
+    // getCSRF: function(cb) {
+    //     return (
+    //         axios({
+    //             method:'GET',
+    //             url:'https://localhost:3000',
+    //             withCredentials: true,
+    //             contentType: 'json',
+    //         })
+    //         .then((response) => {
+    //             return cb(response.data._csrf);
+    //         })
+    //     );
+    // },
 
 }
 
