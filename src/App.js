@@ -1,16 +1,43 @@
 import React, { Component } from 'react';
 
-import DefaultView from './Views/DefaultView.js';
+import Landing from './Views/Landing';
+import Login from './Views/Login';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    console.log("React App Running...");
+    this.state = {
+      loading: true,
+      authenticated: false,
+      token: null
+    };
   }
 
-  render() {
-    return(<DefaultView />);
+  componentDidMount = () => {
+    var token = localStorage.getItem('token');
+
+    /* Simulate a Network Request Checking Authenticity */
+    setTimeout(() => {
+      let authenticated = Math.floor(Math.random() * 1);
+      this.setState({
+        loading: false,
+        authenticated: authenticated,
+        token: token
+      })
+    }, 1000);
+  }
+
+  render = () => {
+    if (this.state.loading) {
+      return(<Landing/>);
+    }
+    else if (this.state.authenticated) {
+      return (<Home/>);
+    }
+    else {
+      return (<Login/>);
+    }
   } 
 
 }
