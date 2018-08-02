@@ -1,4 +1,5 @@
-import DefaultComponent from './DefaultComponent';
+import Button from './Button';
+import InputField from './InputField';
 import LoadingBar from './LoadingBar';
 
-export { DefaultComponent, LoadingBar };
+export { Button, InputField, LoadingBar };
