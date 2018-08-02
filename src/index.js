@@ -4,8 +4,9 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import './styles.css';
+import 'materialize-css/dist/css/materialize.min.css'
 
-document.title = "React App";
+document.title = "Flat Rota";
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
