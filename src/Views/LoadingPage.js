@@ -6,7 +6,7 @@ class Landing extends Component {
 
   render() {
     return (
-      <div className="landing-container">
+      <div className="landing-page">
         <LoadingBar />
       </div>
     );
