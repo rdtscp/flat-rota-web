@@ -1,7 +1,7 @@
 /* ReactJS */
 import * as React                                     from 'react';
 import * as ReactDOM                                  from 'react-dom';
-// import registerServiceWorker                          from './registerServiceWorker';
+import registerServiceWorker                          from './registerServiceWorker';
 
 
 /* Components/Redux */
@@ -18,4 +18,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
-// registerServiceWorker();
+registerServiceWorker();
