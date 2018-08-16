@@ -12,8 +12,6 @@ import store                                          from './State/Store';
 /* Styles */
 import './styles.css';
 
-document.title = "Login Template";
-
 ReactDOM.render(
   <Provider store={store}>
     <App />
