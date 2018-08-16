@@ -8,7 +8,7 @@ import withStyles                                     from '@material-ui/core/st
 
 /* This Project */
 import * as Models                                    from 'src/Models';
-// import { setCurrentUserAction }                       from 'src/State/Actions/userActions';
+import { setCurrentUserAction }                       from 'src/State/Actions/userActions';
 
 /* This Component */
 import FlatForm                                       from './FlatForm';
@@ -16,8 +16,9 @@ import { flatFormClasses }                            from './Styles';
 
 const mapStateToProps = (state: Models.StateType) => {
   return {
+    authState:    state.authState,
     currentUser:  state.currentUser,
   }
 }
 
-export default connect(mapStateToProps, {})(withStyles(flatFormClasses, {withTheme: true})(FlatForm));
+export default connect(mapStateToProps, { setCurrentUserAction })(withStyles(flatFormClasses, {withTheme: true})(FlatForm));

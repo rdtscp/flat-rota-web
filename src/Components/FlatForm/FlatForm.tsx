@@ -17,6 +17,8 @@ import Typography                                     from '@material-ui/core/Ty
 import AddCircleIcon                                  from '@material-ui/icons/AddCircle';
 import CloseIcon                                      from '@material-ui/icons/Close';
 
+/* This Project */
+import * as Models                                    from 'src/Models';
 
 /* This Component */
 import { FlatFormProps, FlatFormState }               from './Types';
@@ -26,12 +28,12 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
   constructor(props: FlatFormProps) {
     super(props);
     this.state = {
-      newGroupMembers:      [ `${this.props.currentUser.username}` ],
-      newGroupName:         '',
-      newGroupNameInvalid:  false,
-      newGroupNewMember:    '',
-      snackbarMessage:      '',
-      snackbarOpen:         false,
+      newFlatMembers:     [ `${this.props.currentUser.username}` ],
+      newFlatName:        '',
+      newFlatNameInvalid: false,
+      newFlatNewMember:   '',
+      snackbarMessage:    '',
+      snackbarOpen:       false,
     };
   }
   
@@ -42,22 +44,22 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
       <div>
         <form className={classes.container} noValidate={true} autoComplete="off">
           <FormControl className={classes.margin}>
-            <InputLabel htmlFor="newGroupName">Flat Name</InputLabel>
+            <InputLabel htmlFor="newFlatName">Flat Name</InputLabel>
             <Input
-              id="newGroupName"
+              id="newFlatName"
               type="text"
               required={true}
-              error={this.state.newGroupNameInvalid}
-              value={this.state.newGroupName}
+              error={this.state.newFlatNameInvalid}
+              value={this.state.newFlatName}
               onChange={this.handleChange}
             />
           </FormControl>
           <FormControl className={classes.margin}>
-            <InputLabel htmlFor="newGroupNewMember">Add Member</InputLabel>
+            <InputLabel htmlFor="newFlatNewMember">Add Member</InputLabel>
             <Input
-              id="newGroupNewMember"
+              id="newFlatNewMember"
               type="text"
-              value={this.state.newGroupNewMember}
+              value={this.state.newFlatNewMember}
               onChange={this.handleChange}
               onKeyDown={this.handleAddMemberEnter}
               endAdornment={
@@ -77,7 +79,7 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
               Members
             </Typography>
             <div style={{ display: 'block' }}>
-              {this.state.newGroupMembers.map((username: string, index: number) => { 
+              {this.state.newFlatMembers.map((username: string, index: number) => { 
                 if (username === this.props.currentUser.username) {
                   return (
                     <Chip
@@ -94,7 +96,7 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
                       key={index}
                       label={username}
                       id={username}
-                      onDelete={this.removeUser}
+                      onDelete={this.removeMember}
                       className={classes.chip}
                       color="primary"
                     />
@@ -139,14 +141,20 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
   }
 
   private createFlatGroup = () => {
-    if (this.state.newGroupName === '') {
+    if (this.state.newFlatName === '') {
       this.showSnackbar('Flat Name cannot be empty.');
       this.setState({
-        newGroupNameInvalid: true,
+        newFlatNameInvalid: true,
       });
     }
     else {
-      this.showSnackbar('Group Created!');
+      const { authState } = this.props;
+      Models.FlatAPI.create(authState.authToken, this.state.newFlatName, this.state.newFlatMembers)
+      .then((data: Models.FlatResponseData) => {
+        this.showSnackbar(data.message);
+        this.props.setCurrentUserAction(authState.authToken);
+      })
+      .catch(error => this.showSnackbar(error.message));
     }
   }
 
@@ -154,7 +162,7 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
     this.setState({
       ...this.state,
       [event.target.id]: event.target.value,
-      newGroupNameInvalid: (event.target.id !== 'newGroupName' && this.state.newGroupName === '') ? true : false,
+      newFlatNameInvalid: (event.target.id !== 'newFlatName' && this.state.newFlatName === '') ? true : false,
     });
   };
 
@@ -165,22 +173,22 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
   };
 
   private addMember = () => {
-    const newMembers = this.state.newGroupMembers;
-    newMembers.push(this.state.newGroupNewMember)
+    const newMembers = this.state.newFlatMembers;
+    newMembers.push(this.state.newFlatNewMember)
     this.setState({
-      newGroupMembers: newMembers,
-      newGroupNewMember: '',
+      newFlatMembers:     newMembers,
+      newFlatNewMember:   '',
     });
   };
 
-  private removeUser = (event: React.MouseEvent<HTMLElement>) => {
+  private removeMember = (event: React.MouseEvent<HTMLElement>) => {
     const chipElement = event.currentTarget.parentElement;
     if (chipElement !== null && 'id' in chipElement) {
-      const memberIndex: number = this.state.newGroupMembers.indexOf(chipElement.id);
-      const newGroupMembers = [...this.state.newGroupMembers];
-      newGroupMembers.splice(memberIndex, 1);
+      const memberIndex: number = this.state.newFlatMembers.indexOf(chipElement.id);
+      const newFlatMembers = [...this.state.newFlatMembers];
+      newFlatMembers.splice(memberIndex, 1);
       this.setState({
-        newGroupMembers,
+        newFlatMembers,
       });
     }
   };

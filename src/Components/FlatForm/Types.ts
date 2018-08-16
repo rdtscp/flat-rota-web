@@ -1,5 +1,5 @@
 // /* React/Redux/Other */
-// import { Dispatch }                                   from 'redux';
+import { Dispatch }                                   from 'redux';
 
 /* This Project */
 import * as Models                                    from 'src/Models';
@@ -8,16 +8,18 @@ import * as Models                                    from 'src/Models';
 import { IFlatFormStyle }                             from './Styles';
 
 interface IFlatFormProps {
+  authState:            Models.AuthStateType;
   currentUser:          Models.User;
+  setCurrentUserAction: (authToken: string) => ((dispatch: Dispatch) => void);
 }
 
 interface IFlatFormState {
-  newGroupMembers:      string[];
-  newGroupName:         string;
-  newGroupNameInvalid:  boolean
-  newGroupNewMember:    string;
-  snackbarMessage:      string;
-  snackbarOpen:         boolean;
+  newFlatMembers:      string[];
+  newFlatName:         string;
+  newFlatNameInvalid:  boolean
+  newFlatNewMember:    string;
+  snackbarMessage:     string;
+  snackbarOpen:        boolean;
 }
 
 type FlatFormProps = IFlatFormProps & IFlatFormStyle;
