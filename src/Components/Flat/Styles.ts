@@ -10,6 +10,9 @@ const flatClasses = (theme: Theme) => createStyles({
     ...theme.typography.button,
     color:  'green',
   },
+  chip: {
+    margin: theme.spacing.unit,
+  },
   root: {
     ...theme.mixins.gutters(),
     borderRadius: 0,

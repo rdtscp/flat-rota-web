@@ -4,7 +4,7 @@
 import * as React from 'react';
 
 /* Material-UI */
-// import Button                                         from '@material-ui/core/Button';
+import Chip                                           from '@material-ui/core/Chip';
 import Paper                                          from '@material-ui/core/Paper';
 import Typography                                     from '@material-ui/core/Typography';
 
@@ -21,8 +21,11 @@ class Flat extends React.Component<FlatProps, FlatState> {
     const thisFlat: Models.Flat = this.props.flat;
     return (
       <Paper className={classes.root} elevation={5}>
-        <Typography variant="title" >
+        <Typography variant="title" style={{textAlign: 'center'}}>
           {thisFlat.name}
+        </Typography>
+        <Typography component="p">
+          {thisFlat.members.map((member, index: number) => <Chip key={index} label={member.username} className={classes.chip} />)}
         </Typography>
       </Paper>
     );
