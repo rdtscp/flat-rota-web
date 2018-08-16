@@ -13,9 +13,10 @@ const intitialStore: Models.StateType = {
   currentUser: {
     createdAt:  0,
     devices:    [],
+    flatGroups: [],
     id:         '',
     updatedAt:  0,
-    username:   ''
+    username:   '',
   }
 };
 
