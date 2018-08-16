@@ -5,14 +5,22 @@ import * as React                                     from 'react';
 
 /* Material-UI */
 import AppBar                                         from '@material-ui/core/AppBar';
+import Collapse                                       from '@material-ui/core/Collapse';
 import Divider                                        from '@material-ui/core/Divider';
 import Drawer                                         from '@material-ui/core/Drawer';
 import Hidden                                         from '@material-ui/core/Hidden';
 import IconButton                                     from '@material-ui/core/IconButton';
 import List                                           from '@material-ui/core/List';
+import ListItem                                       from '@material-ui/core/ListItem';
+import ListItemIcon                                   from '@material-ui/core/ListItemIcon';
+import ListItemText                                   from '@material-ui/core/ListItemText';
+import ListSubheader                                  from '@material-ui/core/ListSubheader';
 import Slide                                          from '@material-ui/core/Slide';
 import Toolbar                                        from '@material-ui/core/Toolbar';
 import Typography                                     from '@material-ui/core/Typography';
+import ExpandLessIcon                                 from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon                                 from '@material-ui/icons/ExpandMore';
+import HomeIcon                                       from '@material-ui/icons/Home';
 import MenuIcon                                       from '@material-ui/icons/Menu';
 import SettingsRoundedIcon                            from '@material-ui/icons/SettingsRounded';
 
@@ -31,8 +39,9 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     const initNavigatorPanes = generatePanes(this.clickPane);
     this.state = {
       activePane:       initNavigatorPanes[0],
-      mobileOpen:       false,
-      mobileWasOpen:    true,
+      drawerOpen:       false,
+      drawerWasOpen:    true,
+      flatListOpen:     false,
       navigatorPanes:   initNavigatorPanes,
       settingsOpen:     false,
     };
@@ -43,16 +52,16 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     
     const drawer = (
       <div>
-        <div className={(this.state.mobileOpen) ? classes.drawerHeader : classes.toolbar}>
+        <div className={(this.state.drawerOpen) ? classes.drawerHeader : classes.toolbar}>
           <Typography variant="title" color="inherit" noWrap={true}>
             <div style={{display: 'flex', flexDirection: 'row'}}>
-              <p className={classes.drawerTitle} style={{flexGrow: 1, color: (this.state.mobileOpen)?'white':'black'}}>
+              <p className={classes.drawerTitle} style={{flexGrow: 1, color: (this.state.drawerOpen)?'white':'black'}}>
                 {currentUser.username}
               </p>
               <IconButton
                 color="inherit"
                 aria-label="Open drawer"
-                style={{margin: 9, color: (this.state.mobileOpen) ? 'white' : 'black'}}
+                style={{margin: 9, color: (this.state.drawerOpen) ? 'white' : 'black'}}
                 onClick={this.toggleSettings}
               >
                 <SettingsRoundedIcon />
@@ -61,10 +70,25 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
           </Typography>
         </div>
         <Divider />
-        <List>
+        <List subheader={<ListSubheader component="div">Your Account</ListSubheader>}>
           <div>
             {this.state.navigatorPanes.map((navigatorPane: Models.NavigatorPane, index: number) => navigatorPane.getDrawer(index)) }
           </div>
+          <Divider />
+          <ListItem button={true} onClick={this.toggleFlatList}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText inset={true} primary="Flat Groups" />
+            {this.state.flatListOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </ListItem>
+          <Collapse in={this.state.flatListOpen} timeout="auto" unmountOnExit={true}>
+            <List component="div" disablePadding={true}>
+              <ListItem button={true} className={classes.nested}>
+                <ListItemText inset={true} primary="Starred" />
+              </ListItem>
+            </List>
+          </Collapse>
         </List>
       </div>
     );
@@ -94,7 +118,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
           <Drawer
             variant="temporary"
             anchor={'left'}
-            open={this.state.mobileOpen}
+            open={this.state.drawerOpen}
             onClose={this.drawerToggle}
             classes={{
               paper: classes.drawerPaper,
@@ -130,8 +154,8 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
 
   private drawerToggle = () => {
     this.setState(state => ({
-      mobileOpen:     !state.mobileOpen,
-      mobileWasOpen:  !state.mobileOpen,
+      drawerOpen:     !state.drawerOpen,
+      drawerWasOpen:  !state.drawerOpen,
     }));
   };
 
@@ -139,21 +163,21 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     this.props.setCurrentUserAction(this.props.authState.authToken);
     if (this.state.settingsOpen === true) {
       this.setState({
-        mobileOpen:   this.state.mobileWasOpen,
+        drawerOpen:   this.state.drawerWasOpen,
         settingsOpen: false,
       })
     }
-    else if (this.state.mobileOpen) {
+    else if (this.state.drawerOpen) {
       this.setState({
-        mobileOpen:     false,
-        mobileWasOpen:  true,
+        drawerOpen:     false,
+        drawerWasOpen:  true,
         settingsOpen: true
       });
     }
     else {
       this.setState({
-        mobileOpen:     false,
-        mobileWasOpen:  false,
+        drawerOpen:     false,
+        drawerWasOpen:  false,
         settingsOpen:   true,  
       })
     }
@@ -164,8 +188,14 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     const activePane  = this.state.navigatorPanes.filter((pane: Models.NavigatorPane) => pane.selectorID === paneClicked)[0];
     this.setState({
       activePane,
-      mobileOpen:     false,
-      mobileWasOpen:  false,
+      drawerOpen:     false,
+      drawerWasOpen:  false,
+    });
+  }
+
+  private toggleFlatList = (event: React.MouseEvent<HTMLElement>) => {
+    this.setState({
+      flatListOpen: !this.state.flatListOpen
     });
   }
   

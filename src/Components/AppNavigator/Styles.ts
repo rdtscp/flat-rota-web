@@ -38,6 +38,9 @@ const appNavigatorClasses = (theme: Theme) => createStyles({
       display: 'none',
     },
   },
+  nested: {
+    paddingLeft: theme.spacing.unit * 4,
+  },
   root: {
     display: 'flex',
     flexGrow: 1,
