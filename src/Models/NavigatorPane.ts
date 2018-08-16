@@ -1,18 +1,21 @@
+/* React/Redux/Other */
+import * as React                                     from 'react';
+
 /* This Project */
 import { ClickHandlerFunc }                           from 'src/Resources/Generics';
 
 interface INavigatorJSXGenerator {
   drawerElement:  (clickHandler: ClickHandlerFunc, selectorID: string, key: number) => JSX.Element;
-  paneElement:    JSX.Element;
+  paneElement:    React.ReactNode;
   paneTitle:      string;
 }
-type NavigatorJSXGenerator   = INavigatorJSXGenerator; 
+export type NavigatorJSXGenerator   = INavigatorJSXGenerator; 
 
-class NavigatorPane {
+export class NavigatorPane {
   
   public  selectorID:     string;
   public drawerElement:  (clickHandler: ClickHandlerFunc, selectorID: string, key: number) => JSX.Element;;
-  public paneElement:    JSX.Element;
+  public paneElement:    React.ReactNode;
   public paneTitle:      string;
   
   private clickHandler:  ClickHandlerFunc;
@@ -30,9 +33,4 @@ class NavigatorPane {
     return this.drawerElement(this.clickHandler, this.selectorID, index);
   }
 
-}
-
-export {
-  NavigatorJSXGenerator,
-  NavigatorPane,
 }

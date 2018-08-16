@@ -5,7 +5,7 @@ import * as React                                     from 'react';
 import ListItem                                       from '@material-ui/core/ListItem';
 import ListItemIcon                                   from '@material-ui/core/ListItemIcon';
 import ListItemText                                   from '@material-ui/core/ListItemText';
-import CodeIcon                                       from '@material-ui/icons/Code';
+import AddCircleIcon                                  from '@material-ui/icons/AddCircle';
 
 /* This Project */
 import { ClickHandlerFunc }                           from 'src/Resources/Generics';
@@ -14,9 +14,9 @@ const drawerJSX: ((clickHandler: ClickHandlerFunc, uniqueID: string, key: number
   /*  Change the JSX of how you want your Drawer Element to Look Here.  */
   <ListItem button={true} id={uniqueID} onClick={clickHandler} key={key}>
     <ListItemIcon>
-      <CodeIcon />
+      <AddCircleIcon />
     </ListItemIcon>
-    <ListItemText primary="Component Example" />
+    <ListItemText primary="Create Flat Group" />
   </ListItem>
 );
 
