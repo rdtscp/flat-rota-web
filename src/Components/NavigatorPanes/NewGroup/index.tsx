@@ -9,7 +9,7 @@ import drawerJSX                                      from './DrawerJSX';
 import NewGroupPane                                   from './NewGroupPane';
 
 /* Change your Pane Title */
-const paneTitle       = 'Create New Flat Group';
+const paneTitle       = 'Create Flat Group';
 
 /* Change paneElement to an instance of your Component */
 const drawerElement   = drawerJSX;

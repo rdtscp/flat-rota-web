@@ -73,7 +73,7 @@ export default class NewGroupPane extends React.Component<NewGroupPaneProps, New
             />
           </FormControl>
           <Paper className={classes.paperRoot} elevation={1}>
-            <Typography variant="headline" component="h3">
+            <Typography variant="subheading">
               Members
             </Typography>
             <div style={{ display: 'block' }}>
@@ -105,7 +105,7 @@ export default class NewGroupPane extends React.Component<NewGroupPaneProps, New
             </div>
           </Paper>
           <Button variant="contained" color="primary" className={classes.button} onClick={this.createFlatGroup}>
-            Create
+            Create Flat Group
             <Icon className={classes.rightIcon}>send</Icon>
           </Button>
         </form>
