@@ -96,10 +96,10 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       </React.Fragment>
     );
 
-    const paneTitle = "Pane Title";
-
+    let paneTitle;
     let paneContent;
     if (activePane === 'yourTodos') {
+      paneTitle   = "Your Todos";
       paneContent = (
         <React.Fragment>
             <TodoList />
@@ -107,6 +107,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       );
     }
     else if (activePane === 'createFlat') {
+      paneTitle   = "Create New Flat";
       paneContent = (
         <React.Fragment>
           <FlatForm />
@@ -115,6 +116,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     }
     else {
       const currentFlat = this.getFlatByID(activePane);
+      paneTitle   = currentFlat.name;
       paneContent = (
         <React.Fragment>
             <Flat flat={currentFlat} />
