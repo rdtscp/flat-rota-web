@@ -1,7 +1,9 @@
 /* Types */
 import { Dispatch }                                   from 'redux';
 import { UserAPI, UserResponseData }                  from 'src/Models';
-import { SET_CURR_USER }                              from './actionTypes';
+import { SET_CURR_USER, SET_FLATS }                   from './actionTypes';
+
+import * as Models                                    from 'src/Models';
 
 const setCurrentUserAction = (authToken: string) => ((dispatch: Dispatch) => {
     UserAPI.get(authToken)
@@ -21,4 +23,11 @@ const setCurrentUserAction = (authToken: string) => ((dispatch: Dispatch) => {
     })
 });
 
-export { setCurrentUserAction };
+const setCurrentUserFlats = (flats: Models.Flat[]) => ((dispatch: Dispatch) => {
+  return dispatch({
+    payload: flats,
+    type:    SET_FLATS
+  });
+});
+
+export { setCurrentUserAction, setCurrentUserFlats };
