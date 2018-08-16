@@ -114,7 +114,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       );
     }
     else {
-      const currentFlat = currentUser.flats.filter((flat) => (flat.id === activePane))[0];
+      const currentFlat = this.getFlatByID(activePane);
       paneContent = (
         <React.Fragment>
             <Flat flat={currentFlat} />
@@ -162,8 +162,13 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
 
   private clickDrawer = (event: React.MouseEvent<HTMLElement>) => {
     this.setState({
-      activePane: event.currentTarget.id
+      activePane: event.currentTarget.id,
+      drawerOpen: false,
     });
+  }
+
+  private getFlatByID = (id: string) => {
+    return this.props.currentUser.flats.filter((flat) => (flat.id === id))[0];
   }
 
   /* Toggle UI Components */
@@ -197,6 +202,15 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     }
   };
   private toggleFlatList = (event: React.MouseEvent<HTMLElement>) => {
+    const populatedFlats: Array<Promise<Models.Flat | null>> = this.props.currentUser.flats.map((flat: Models.Flat) => 
+      Models.FlatAPI.get(this.props.authState.authToken, flat.id)
+      .then((data: Models.FlatResponseData) => data.content)
+      .catch(error => null)
+    );
+    Promise.all(populatedFlats)
+    .then(flats => {
+      this.props.setCurrentUserFlats(flats as Models.Flat[]);
+    })
     this.setState({
       flatListOpen: !this.state.flatListOpen
     });
