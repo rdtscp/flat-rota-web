@@ -117,11 +117,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     else {
       const currentFlat = this.getFlatByID(activePane);
       paneTitle   = currentFlat.name;
-      paneContent = (
-        <React.Fragment>
-            <Flat flat={currentFlat} />
-        </React.Fragment>
-      );
+      paneContent = (<Flat flat={currentFlat} />);
     }
 
     return (
