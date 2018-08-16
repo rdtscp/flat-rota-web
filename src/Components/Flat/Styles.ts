@@ -13,6 +13,11 @@ const flatClasses = (theme: Theme) => createStyles({
   chip: {
     margin: theme.spacing.unit,
   },
+  fab: { 
+    bottom: theme.spacing.unit * 4,
+    position: 'fixed',
+    right: theme.spacing.unit * 4,
+  },
   root: {
     ...theme.mixins.gutters(),
     borderRadius: 0,
