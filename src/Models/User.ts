@@ -17,7 +17,7 @@ interface IUserType {
   readonly updatedAt:   number;
   readonly id:          string;
   readonly username:    string;
-  readonly flatGroups:  Models.Flat[];
+  readonly flats:       Models.Flat[];
 }
 
 type User = IUserType;

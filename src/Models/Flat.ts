@@ -37,10 +37,11 @@ type Flat = IFlatType;
 const FlatAPI = {
 
   get(authToken: string) {
+    
     return '@TODO';
   },
 
-  create(authToken: string, username: string, password: string) {
+  create(authToken: string, flatName: string, flatMembers: string[]) {
     return '@TODO';
   },
 
