@@ -6,9 +6,9 @@ import { Theme }                                      from '@material-ui/core/st
 import { WithStyles }                                 from '@material-ui/core/styles/withStyles';
 
 
-const todoPaneClasses = (theme: Theme) => createStyles({
+const todoClasses = (theme: Theme) => createStyles({
 });
 
-interface ITodoPaneStyle extends WithStyles<typeof todoPaneClasses> {};
+interface ITodoStyle extends WithStyles<typeof todoClasses> {};
 
-export { todoPaneClasses, ITodoPaneStyle };
+export { todoClasses, ITodoStyle };

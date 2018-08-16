@@ -15,24 +15,12 @@ const appNavigatorClasses = (theme: Theme) => createStyles({
     },
     position: 'absolute',
   },
-  content: {
-    backgroundColor: theme.palette.background.default,
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-  },
-  drawerHeader: {
-    ...theme.mixins.toolbar,
-    backgroundColor: theme.palette.primary.main,
-  },
   drawerPaper: {
     [theme.breakpoints.up('md')]: {
       position: 'relative',
     },
     width: drawerWidth,
-  },
-  drawerTitle: {
-    marginLeft: 24,
-  },
+  },  
   navIconHide: {
     [theme.breakpoints.up('md')]: {
       display: 'none',
@@ -40,6 +28,11 @@ const appNavigatorClasses = (theme: Theme) => createStyles({
   },
   nested: {
     paddingLeft: theme.spacing.unit * 4,
+  },
+  paneContainer: {
+    backgroundColor: theme.palette.background.default,
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
   },
   root: {
     display: 'flex',

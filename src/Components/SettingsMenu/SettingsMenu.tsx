@@ -21,8 +21,8 @@ import ExpandMoreIcon                                 from '@material-ui/icons/E
 import SmartphoneIcon                                 from '@material-ui/icons/Smartphone';
 
 /* This Project */
-import ConfirmDelete                                  from 'src/Components/SettingsMenu/ConfirmDelete';
-import DeviceList                                     from 'src/Components/SettingsMenu/DeviceList';
+import ConfirmDelete                                  from 'src/Components/ConfirmDelete';
+import DeviceList                                     from 'src/Components/DeviceList';
 import * as Models                                    from 'src/Models';
 
 /* This Component*/
@@ -41,7 +41,7 @@ class SettingsMenu extends React.Component<SettingsMenuProps, SettingsMenuState>
   public render() {
     const { classes } = this.props;
     return (
-      <div>
+      <React.Fragment>
         <AppBar color="default" position="static">
           <Toolbar>
             <IconButton onClick={this.props.closeSettings} className={classes.menuButton} color="inherit" aria-label="Menu">
@@ -100,7 +100,7 @@ class SettingsMenu extends React.Component<SettingsMenuProps, SettingsMenuState>
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </React.Fragment>
     );
   }
 

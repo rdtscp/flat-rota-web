@@ -1,6 +1,5 @@
 import { Device, DeviceAPI, DeviceResponseData }      from './Device';
-import { Flat, FlatAPI }                              from './Flat';
-import { NavigatorJSXGenerator, NavigatorPane }       from './NavigatorPane';
+import { Flat, FlatAPI, FlatResponseData }            from './Flat';
 import { AuthStateType, StateType  }                  from './State';
 import { User, UserAPI, UserResponseData }            from './User';
 
@@ -11,8 +10,7 @@ export {
   DeviceResponseData,
   Flat,
   FlatAPI,
-  NavigatorJSXGenerator,
-  NavigatorPane,
+  FlatResponseData,
   StateType,
   User,
   UserAPI,

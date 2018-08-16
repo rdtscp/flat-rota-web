@@ -11,8 +11,8 @@ import * as Models                                    from 'src/Models';
 // import { setCurrentUserAction }                       from 'src/State/Actions/userActions';
 
 /* This Component */
-import NewGroupPane                                   from './NewGroupPane';
-import { newGroupPaneClasses }                        from './Styles';
+import FlatForm                                       from './FlatForm';
+import { flatFormClasses }                            from './Styles';
 
 const mapStateToProps = (state: Models.StateType) => {
   return {
@@ -20,4 +20,4 @@ const mapStateToProps = (state: Models.StateType) => {
   }
 }
 
-export default connect(mapStateToProps, {})(withStyles(newGroupPaneClasses, {withTheme: true})(NewGroupPane));
+export default connect(mapStateToProps, {})(withStyles(flatFormClasses, {withTheme: true})(FlatForm));

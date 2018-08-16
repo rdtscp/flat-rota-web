@@ -1,14 +1,15 @@
 /* React/Redux/Other */
-// import axios, { AxiosResponse }                       from 'axios';
+import axios, { AxiosResponse }                       from 'axios';
+// import axios                       from 'axios';
 
 /* This Project */
 import * as Models                                    from 'src/Models';
-// import network                                        from 'src/Resources/networkHelper';
+import network                                        from 'src/Resources/networkHelper';
 
 export {
   Flat,
   FlatAPI,
-  // UserResponseData,
+  FlatResponseData,
 };
 
 interface IFlatType {
@@ -16,33 +17,67 @@ interface IFlatType {
   readonly createdAt:   number;
   readonly updatedAt:   number;
   readonly id:          string;
-  readonly groupName:   string;
+  readonly name:        string;
 }
 
 type Flat = IFlatType;
 
 /* API Types */
 
-// interface IUserResponseData {
-//   error:    boolean;
-//   warning:  boolean;
-//   message:  string;
-//   content:  User | null;
-// }
+interface IFlatResponseData {
+  error:    boolean;
+  warning:  boolean;
+  message:  string;
+  content:  Flat | null;
+}
 
-// type UserResponseData = IUserResponseData;
+type FlatResponseData = IFlatResponseData;
 
 /* API */
 
 const FlatAPI = {
 
-  get(authToken: string) {
-    
-    return '@TODO';
+  get(authToken: string, flatID: string) {
+    return new Promise((resolve, reject) => {
+      network.getCSRF((csrf: string) => {
+        axios.post(process.env.REACT_APP_API_URL + '/flat/get', {
+          _csrf: csrf,
+          authToken,
+          flatID,
+        },{
+          withCredentials: true,
+        })
+        .then((response: AxiosResponse) => {
+          const data: FlatResponseData = response.data;
+          return resolve(data);
+        })
+        .catch((error) => {
+          return reject(error);
+        });
+      });
+    });
   },
 
   create(authToken: string, flatName: string, flatMembers: string[]) {
-    return '@TODO';
+    return new Promise((resolve, reject) => {
+      network.getCSRF((csrf: string) => {
+        axios.post(process.env.REACT_APP_API_URL + '/flat/create', {
+          _csrf: csrf,
+          authToken,
+          flatMembers,
+          flatName,
+        },{
+          withCredentials: true,
+        })
+        .then((response: AxiosResponse) => {
+          const data: FlatResponseData = response.data;
+          return resolve(data);
+        })
+        .catch((error) => {
+          return reject(error);
+        });
+      });
+    });
   },
 
   update(authToken: string) {

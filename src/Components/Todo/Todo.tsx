@@ -2,9 +2,9 @@
 import * as React                                     from 'react';
 
 /* This Component */
-import { TodoPaneProps, TodoPaneState }       from './Types';
+import { TodoProps, TodoState }                       from './Types';
 
-export default class TodoPane extends React.Component<TodoPaneProps, TodoPaneState> {
+export default class Todo extends React.Component<TodoProps, TodoState> {
   
   public render() {
     return (

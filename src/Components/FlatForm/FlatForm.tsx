@@ -19,11 +19,11 @@ import CloseIcon                                      from '@material-ui/icons/C
 
 
 /* This Component */
-import { NewGroupPaneProps, NewGroupPaneState }       from './Types';
+import { FlatFormProps, FlatFormState }               from './Types';
 
-export default class NewGroupPane extends React.Component<NewGroupPaneProps, NewGroupPaneState> {
+export default class FlatForm extends React.Component<FlatFormProps, FlatFormState> {
 
-  constructor(props: NewGroupPaneProps) {
+  constructor(props: FlatFormProps) {
     super(props);
     this.state = {
       newGroupMembers:      [ `${this.props.currentUser.username}` ],

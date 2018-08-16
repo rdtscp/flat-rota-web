@@ -11,7 +11,7 @@ import withStyles                                     from '@material-ui/core/st
 // import { setCurrentUserAction }                       from 'src/State/Actions/userActions';
 
 /* This Component */
-import { todoPaneClasses }                            from './Styles';
-import TodoPane                                       from './TodoPane';
+import { todoClasses }                                from './Styles';
+import Todo                                           from './Todo';
 
-export default connect(null, {})(withStyles(todoPaneClasses, {withTheme: true})(TodoPane));
+export default connect(null, {})(withStyles(todoClasses, {withTheme: true})(Todo));

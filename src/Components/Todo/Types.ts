@@ -5,7 +5,7 @@
 // import * as Models                                    from 'src/Models';
 
 /* This Component */
-import { ITodoPaneStyle }                               from './Styles';
+import { ITodoStyle }                                   from './Styles';
 
 // interface INewGroupPaneProps {
 // }
@@ -13,7 +13,7 @@ import { ITodoPaneStyle }                               from './Styles';
 // interface INewGroupPaneState {
 // }
 
-type TodoPaneProps = {} & ITodoPaneStyle;
-type TodoPaneState = {} & {};
+type TodoProps = {} & ITodoStyle;
+type TodoState = {} & {};
 
-export { TodoPaneProps, TodoPaneState };
+export { TodoProps, TodoState };

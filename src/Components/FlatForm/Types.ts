@@ -5,13 +5,13 @@
 import * as Models                                    from 'src/Models';
 
 /* This Component */
-import { INewGroupPaneStyle }                         from './Styles';
+import { IFlatFormStyle }                             from './Styles';
 
-interface INewGroupPaneProps {
+interface IFlatFormProps {
   currentUser:          Models.User;
 }
 
-interface INewGroupPaneState {
+interface IFlatFormState {
   newGroupMembers:      string[];
   newGroupName:         string;
   newGroupNameInvalid:  boolean
@@ -20,7 +20,7 @@ interface INewGroupPaneState {
   snackbarOpen:         boolean;
 }
 
-type NewGroupPaneProps = INewGroupPaneProps & INewGroupPaneStyle;
-type NewGroupPaneState = INewGroupPaneState;
+type FlatFormProps = IFlatFormProps & IFlatFormStyle;
+type FlatFormState = IFlatFormState;
 
-export { NewGroupPaneProps, NewGroupPaneState };
+export { FlatFormProps, FlatFormState };

@@ -6,7 +6,7 @@ import { Theme }                                      from '@material-ui/core/st
 import { WithStyles }                                 from '@material-ui/core/styles/withStyles';
 
 
-const newGroupPaneClasses = (theme: Theme) => createStyles({
+const flatFormClasses = (theme: Theme) => createStyles({
   button: {
     margin: theme.spacing.unit,
   },
@@ -41,6 +41,6 @@ const newGroupPaneClasses = (theme: Theme) => createStyles({
   },
 });
 
-interface INewGroupPaneStyle extends WithStyles<typeof newGroupPaneClasses> {};
+interface IFlatFormStyle extends WithStyles<typeof flatFormClasses> {};
 
-export { newGroupPaneClasses, INewGroupPaneStyle };
+export { flatFormClasses, IFlatFormStyle };

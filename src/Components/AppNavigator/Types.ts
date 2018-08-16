@@ -16,12 +16,11 @@ interface IAppNavigatorProps {
 }
 
 interface IAppNavigatorState {
-  activePane:       Models.NavigatorPane;
-  drawerOpen:       boolean;
-  drawerWasOpen:    boolean;
-  flatListOpen:     boolean;
-  navigatorPanes:   Models.NavigatorPane[];
-  settingsOpen:     boolean;
+  activePane:     string;
+  drawerOpen:     boolean;
+  drawerWasOpen:  boolean;
+  flatListOpen:   boolean;
+  settingsOpen:   boolean;
 }
 
 type AppNavigatorProps = IAppNavigatorProps & IAppNavigatorStyle;

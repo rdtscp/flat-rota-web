@@ -1,7 +1,7 @@
 /* Components/SettingsMenu/Device/Device.tsx */
 
 /* React/Redux/Other */
-import * as React from 'react';
+import * as React                                     from 'react';
 
 /* Material-UI */
 import Button                                         from '@material-ui/core/Button';

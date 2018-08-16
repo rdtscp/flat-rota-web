@@ -17,7 +17,7 @@ import Snackbar                                       from '@material-ui/core/Sn
 import CloseIcon                                      from '@material-ui/icons/Close';
 
 /* This Project */
-import Device                                         from 'src/Components/SettingsMenu/Device';
+import Device                                         from 'src/Components/Device';
 import * as Models                                    from 'src/Models';
 import utilities                                      from 'src/Resources/utilitiesHelper';
 
