@@ -60,7 +60,7 @@ export const DeviceAPI = {
     return new Promise((resolve, reject) => {
       axiosRetry(axios, { retries: 10 });
       network.getCSRF((csrf: string) => {
-        axiosRetry(axios, { retries: 1 });
+        axiosRetry(axios, { retries: 0 });
         axios.post(process.env.REACT_APP_API_URL + '/device/create', {
           _csrf: csrf,
           authToken,
@@ -84,7 +84,7 @@ export const DeviceAPI = {
     return new Promise((resolve, reject) => {
       axiosRetry(axios, { retries: 10 });
       network.getCSRF((csrf: string) => {
-        axiosRetry(axios, { retries: 1 });
+        axiosRetry(axios, { retries: 0 });
         axios.post(process.env.REACT_APP_API_URL + '/device/destroy', {
           _csrf: csrf,
           authToken,
