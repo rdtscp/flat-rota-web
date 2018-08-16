@@ -13,6 +13,7 @@ interface IAppNavigatorProps {
   authState:            Models.AuthStateType;
   currentUser:          Models.User;
   setCurrentUserAction: (authToken: string) => ((dispatch: Dispatch) => void);
+  setCurrentUserFlats:  (flats: Models.Flat[]) => ((dispatch: Dispatch) => void);
 }
 
 interface IAppNavigatorState {

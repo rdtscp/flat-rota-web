@@ -8,7 +8,7 @@ import withStyles                                     from '@material-ui/core/st
 
 /* This Project */
 import * as Models                                    from 'src/Models';
-import { setCurrentUserAction }                       from 'src/State/Actions/userActions';
+import { setCurrentUserAction, setCurrentUserFlats }  from 'src/State/Actions/userActions';
 
 /* This Component */
 import AppNavigator                                   from './AppNavigator';
@@ -21,4 +21,4 @@ const mapStateToProps = (state: Models.StateType) => {
   }
 }
 
-export default connect(mapStateToProps, { setCurrentUserAction })(withStyles(appNavigatorClasses, {withTheme: true})(AppNavigator));
+export default connect(mapStateToProps, { setCurrentUserAction, setCurrentUserFlats })(withStyles(appNavigatorClasses, {withTheme: true})(AppNavigator));
