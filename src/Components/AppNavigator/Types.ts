@@ -17,6 +17,7 @@ interface IAppNavigatorProps {
 }
 
 interface IAppNavigatorState {
+  anchorEl:       HTMLElement | null;
   activePane:     string;
   drawerOpen:     boolean;
   drawerWasOpen:  boolean;

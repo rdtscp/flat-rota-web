@@ -16,16 +16,20 @@ import ListItem                                       from '@material-ui/core/Li
 import ListItemIcon                                   from '@material-ui/core/ListItemIcon';
 import ListItemText                                   from '@material-ui/core/ListItemText';
 import ListSubheader                                  from '@material-ui/core/ListSubheader';
+import Menu                                           from '@material-ui/core/Menu';
+import MenuItem                                       from '@material-ui/core/MenuItem';
 import Slide                                          from '@material-ui/core/Slide';
 import Toolbar                                        from '@material-ui/core/Toolbar';
 import Typography                                     from '@material-ui/core/Typography';
 import AddCircleIcon                                  from '@material-ui/icons/AddCircle';
 import ExpandLessIcon                                 from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon                                 from '@material-ui/icons/ExpandMore';
+import GroupAddIcon                                   from '@material-ui/icons/GroupAdd';
 import HomeIcon                                       from '@material-ui/icons/Home';
 import ListIcon                                       from '@material-ui/icons/List';
 import LocationOnIcon                                 from '@material-ui/icons/LocationOn';
 import MenuIcon                                       from '@material-ui/icons/Menu';
+import WarningIcon                                    from '@material-ui/icons/Warning';
 
 /* This Project */
 import DrawerHeader                                   from 'src/Components/DrawerHeader';
@@ -45,6 +49,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
 
     this.state = {
       activePane:         'yourTodos',
+      anchorEl:           null,
       drawerOpen:         false,
       drawerWasOpen:      true,
       flatListOpen:       false,
@@ -56,6 +61,8 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     const { classes, currentUser } = this.props;
     const { activePane, drawerOpen, flatListOpen, settingsOpen } = this.state;
     
+    const flatOptsOpen = Boolean(this.state.anchorEl);
+
     const drawer = (
       <React.Fragment>
         <DrawerHeader drawerOpen={drawerOpen} toggleSettings={this.toggleSettings} />
@@ -102,7 +109,9 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       paneTitle   = "Your Todos";
       paneContent = (
         <React.Fragment>
+          <Typography variant="title" gutterBottom={true}>
             <TodoList />
+          </Typography>
         </React.Fragment>
       );
     }
@@ -110,7 +119,9 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       paneTitle   = "Create New Flat";
       paneContent = (
         <React.Fragment>
-          <FlatForm />
+          <Typography variant="title" gutterBottom={true}>
+            <FlatForm />
+          </Typography>
         </React.Fragment>
       );
     }
@@ -132,9 +143,30 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
             <IconButton color="inherit" aria-label="Open drawer" onClick={this.toggleDrawer} className={classes.navIconHide}>
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap={true}>
+            <Typography variant="title" color="inherit" noWrap={true} style={{flexGrow: 1}}>
               {paneTitle}
             </Typography>
+            {(activePane !== 'yourTodos' && activePane !== 'createFlat') ? (
+              <React.Fragment>
+                <IconButton color="inherit" onClick={this.addMembersFlat}>
+                  <GroupAddIcon /> 
+                </IconButton>
+                <div>
+                  <IconButton
+                    aria-owns={flatOptsOpen ? 'menu-appbar' : ''}
+                    aria-haspopup="true"
+                    onClick={this.openFlatOptions}
+                    color="inherit"
+                    >
+                    <WarningIcon />
+                  </IconButton>
+                  <Menu id="menu-appbar" anchorEl={this.state.anchorEl} anchorOrigin={{ horizontal: 'right', vertical: 'top', }} transformOrigin={{ horizontal: 'right', vertical: 'top', }} open={flatOptsOpen} onClose={this.clickFlatOption} >
+                    <MenuItem id="leaveFlat" onClick={this.clickFlatOption}>Leave Flat</MenuItem>
+                    <MenuItem id="deleteFlat"  onClick={this.clickFlatOption}>Delete Flat</MenuItem>
+                  </Menu>
+                </div>
+              </React.Fragment>
+            ) : null}
           </Toolbar>
         </AppBar>
         <Hidden mdUp={true}>
@@ -149,9 +181,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
         </Hidden>
         <main className={classes.paneContainer}>
           <div className={classes.toolbar} />
-          <Typography variant="title" gutterBottom={true}>
-            {paneContent}
-          </Typography>
+          {paneContent}
         </main>
       </div>
     );
@@ -215,6 +245,21 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     this.setState({
       flatListOpen: !this.state.flatListOpen
     });
+  }
+  private openFlatOptions = (event: React.MouseEvent<HTMLElement>) => {
+    this.setState({
+      anchorEl: event.currentTarget
+    });
+  }
+
+  private addMembersFlat  = (event: React.MouseEvent<HTMLElement>) => {
+    alert('Popup to Handle Adding Members to Flat: ' + this.state.activePane);
+  }
+  private clickFlatOption = (event: React.MouseEvent<HTMLElement>) => {
+    if (event.currentTarget.id !== '') {
+      alert('Clicked Flat Option: ' + event.currentTarget.id + ' for flat: ' + this.state.activePane);
+    }      
+    this.setState({ anchorEl: null });
   }
   
 }
