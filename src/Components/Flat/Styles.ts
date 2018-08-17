@@ -18,6 +18,10 @@ const flatClasses = (theme: Theme) => createStyles({
     position: 'fixed',
     right: theme.spacing.unit * 4,
   },
+  flatContainer: {
+    alignItems:       'center',
+    display:          'flex',
+  },
   root: {
     ...theme.mixins.gutters(),
     borderRadius: 0,

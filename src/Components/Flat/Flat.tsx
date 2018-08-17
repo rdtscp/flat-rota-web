@@ -6,9 +6,16 @@ import * as React from 'react';
 /* Material-UI */
 import Button                                         from '@material-ui/core/Button';
 import Chip                                           from '@material-ui/core/Chip';
-import Paper                                          from '@material-ui/core/Paper';
+import ExpansionPanel                                 from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails                          from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary                          from '@material-ui/core/ExpansionPanelSummary';
+// import List                                           from '@material-ui/core/List';
+// import ListItem                                       from '@material-ui/core/ListItem';
+// import ListItemText                                   from '@material-ui/core/ListItemText';
+// import Paper                                          from '@material-ui/core/Paper';
 import Typography                                     from '@material-ui/core/Typography';
 import AddIcon                                        from '@material-ui/icons/Add';
+import ExpandMoreIcon                                 from '@material-ui/icons/ExpandMore';
 
 /* This Project */
 import * as Models                                    from "src/Models";
@@ -22,18 +29,28 @@ class Flat extends React.Component<FlatProps, FlatState> {
     const { classes } = this.props;
     const thisFlat: Models.Flat = this.props.flat;
     return (
-      <React.Fragment>
-        <Paper className={classes.root} elevation={5}>
-          <Typography variant="title" style={{textAlign: 'center'}}>
-            {thisFlat.name}
-          </Typography>
-          {thisFlat.members.map((member, index: number) => <Chip key={index} label={member.username} className={classes.chip} />)}
-        </Paper>
-        <Button variant="fab" className={classes.fab} color="primary" >
-          <AddIcon />
-        </Button>
-      </React.Fragment>
+      <div className={classes.flatContainer}>
+        <div style={{ width: '100%' }}>
+          <ExpansionPanel>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="title"> Flat Members </Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+                {thisFlat.members.map((member, index) =>
+                    <Chip key={index} label={member.username} className={classes.chip} color="primary" />
+                )}
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <Button variant="fab" className={classes.fab} color="primary" onClick={this.createItem} >
+            <AddIcon />
+          </Button>
+        </div>
+      </div>
     );
+  }
+
+  private createItem = (event: React.MouseEvent<HTMLElement>) => {
+    alert('Popup to create new Item for Flat: ' + this.props.flat.id);
   }
 
 }
