@@ -1,0 +1,6 @@
+{
+  "material-icon-theme.folders.associations": {
+    "Redux": "Redux-actions",
+    "Components": "React-components"
+  },
+}
