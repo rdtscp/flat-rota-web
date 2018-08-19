@@ -43,12 +43,16 @@ class Flat extends React.Component<FlatProps, FlatState> {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 {thisFlat.members.map((member, index) =>
-                    <Chip key={index} label={member.username} className={classes.chip} color="primary" />
+                  <React.Fragment key={index}>
+                    <Chip label={member.username} className={classes.chip} color="primary" />
+                  </React.Fragment>
                 )}
             </ExpansionPanelDetails>
           </ExpansionPanel>
           {thisFlat.items.map((item: Models.Item, index: number) => (
-            <Item item={item} key={index} />
+            <React.Fragment key={index}>
+              <Item item={item} flat={this.props.flat} />
+            </React.Fragment>
           ))}
           <Button variant="fab" className={classes.fab} color="primary" onClick={this.toggleNewItemDialog} >
             <Icons.Add />
@@ -147,7 +151,7 @@ class Flat extends React.Component<FlatProps, FlatState> {
     }
     Models.ItemAPI.create(this.props.flat.id, this.state.newItemName, this.state.newItemDesc)
     .then((data: Models.ItemResponseData) => {
-      this.showSnackbar(data.message + '. Refresh to see changes.');
+      this.showSnackbar(data.message);
       if ('error' in data && 'warning' in data && !data.error && !data.warning) {
         this.setState({
           dialogOpen:   false,
@@ -155,6 +159,15 @@ class Flat extends React.Component<FlatProps, FlatState> {
           newItemName:  '',
         });
       }
+      const populatedFlats: Array<Promise<Models.Flat | null>> = this.props.currentUser.flats.map((flat: Models.Flat) => 
+        Models.FlatAPI.get(flat.id)
+        .then((flatData: Models.FlatResponseData) => flatData.content)
+        .catch(err => null)
+      );
+      Promise.all(populatedFlats)
+      .then(flats => {
+        this.props.setCurrentUserFlats(flats as Models.Flat[]);
+      });
     })
     .catch(error => {
       // tslint:disable-next-line:no-console

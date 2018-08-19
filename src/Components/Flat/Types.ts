@@ -10,8 +10,9 @@ import * as Models                                    from "src/Models";
 import { IFlatStyle }                                 from './Styles';
 
 interface IFlatProps {
-  flat: Models.Flat;
-  setCurrentUserFlats:  (flats: Models.Flat[]) => ((dispatch: Dispatch) => void);
+  currentUser:            Models.User;
+  flat:                   Models.Flat;
+  setCurrentUserFlats:    (flats: Models.Flat[]) => ((dispatch: Dispatch) => void);
 }
 
 interface IFlatState {

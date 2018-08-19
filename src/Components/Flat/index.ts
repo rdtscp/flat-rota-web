@@ -7,10 +7,17 @@ import { connect }                                    from 'react-redux';
 import withStyles                                     from '@material-ui/core/styles/withStyles';
 
 /* This Project */
+import * as Models                                    from 'src/Models';
 import { setCurrentUserFlats }                        from 'src/Redux/Actions/userActions';
 
 /* This Component */
 import Flat                                           from './Flat';
 import { flatClasses }                                from './Styles';
 
-export default connect(null, { setCurrentUserFlats })(withStyles(flatClasses, {withTheme: true})(Flat));
+const mapStateToProps = (state: Models.StateType) => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps, { setCurrentUserFlats })(withStyles(flatClasses, {withTheme: true})(Flat));
