@@ -8,11 +8,12 @@ import    store                                       from 'src/Redux/Store';
 import network                                        from 'src/Resources/networkHelper';
 
 interface IItemType {
-  readonly id:          string;
-  readonly flat:        Models.Flat;
-  readonly name:        string;
-  readonly description: string;
-  readonly rota:        Models.User[];
+  readonly id:            string;
+  readonly flat:          Models.Flat;
+  readonly name:          string;
+  readonly description:   string;
+  readonly rota:          Models.User[];
+  readonly notification:  boolean;
 }
 
 export type Item = IItemType;
@@ -49,6 +50,7 @@ export const ItemAPI = {
           description,
           flatID,
           name,
+          notification: false
         },{
           withCredentials: true,
         })
@@ -99,7 +101,7 @@ export const ItemAPI = {
           _csrf: csrf,
           authToken,
           flatID,
-          itemID,
+          itemID
         },{
           withCredentials: true,
         })
