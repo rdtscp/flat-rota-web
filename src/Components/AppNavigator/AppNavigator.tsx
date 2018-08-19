@@ -212,9 +212,6 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     }
   };
   private toggleFlatList = (event: React.MouseEvent<HTMLElement>) => {
-    // tslint:disable-next-line:no-console
-    console.log('State Holds ' + this.props.currentUser.flats.length + ' flats');
-
     const populatedFlats: Array<Promise<Models.Flat | null>> = this.props.currentUser.flats.map((flat: Models.Flat) => 
     Models.FlatAPI.get(flat.id)
       .then((data: Models.FlatResponseData) => data.content)
