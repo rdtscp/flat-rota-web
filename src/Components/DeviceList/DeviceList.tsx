@@ -123,7 +123,7 @@ class DeviceList extends React.Component<DeviceListProps, DeviceListState> {
     const deviceAuthToken = this.state.deviceToLogoutAuthToken;
     const deviceID        = this.state.deviceToLogoutID;
 
-    Models.DeviceAPI.destroy(this.props.authState.authToken, deviceID, deviceAuthToken)
+    Models.DeviceAPI.destroy(deviceID, deviceAuthToken)
     .then(({ error, warning, message, content }: Models.DeviceResponseData) => {
       if (error) {
         alert('Error: ' + message);

@@ -8,9 +8,8 @@ import * as Models                                    from 'src/Models';
 import { IFlatFormStyle }                             from './Styles';
 
 interface IFlatFormProps {
-  authState:            Models.AuthStateType;
   currentUser:          Models.User;
-  setCurrentUserAction: (authToken: string) => ((dispatch: Dispatch) => void);
+  setCurrentUserAction: () => ((dispatch: Dispatch) => void);
 }
 
 interface IFlatFormState {

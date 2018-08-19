@@ -51,6 +51,7 @@ class Flat extends React.Component<FlatProps, FlatState> {
 
   private createItem = (event: React.MouseEvent<HTMLElement>) => {
     alert('Popup to create new Item for Flat: ' + this.props.flat.id);
+    // Models.FlatAPI.create()
   }
 
 }

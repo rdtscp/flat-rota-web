@@ -1,7 +1,7 @@
 /* Components/SettingsMenu/DeviceList/Types.ts */  //
 
 /* React/Redux/Other */
-import { Dispatch }                                   from 'redux';
+// import { Dispatch }                                   from 'redux';
 
 /* This Project */
 import * as Models                                    from 'src/Models';
@@ -10,10 +10,7 @@ import * as Models                                    from 'src/Models';
 import { ITodoListStyle }                             from './Styles';
 
 interface ITodoListProps {
-  authState:            Models.AuthStateType;
   devices:              Models.Device[];
-  setAuthStateAction:   (authToken: string) => ((dispatch: Dispatch) => void);
-  setCurrentUserAction: (authToken: string) => ((dispatch: Dispatch) => void);
 }
 
 interface ITodoListState {

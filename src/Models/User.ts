@@ -3,6 +3,7 @@ import axios, { AxiosResponse }                       from 'axios';
 
 /* This Project */
 import * as Models                                    from 'src/Models';
+import store                                          from 'src/Redux/Store';
 import network                                        from 'src/Resources/networkHelper';
 
 export {
@@ -35,7 +36,8 @@ type UserResponseData = IUserResponseData;
 
 const UserAPI = {
 
-  get(authToken: string) {
+  get() {
+    const authToken: string = store.getState().authState.authToken;
     return new Promise((resolve, reject) => {
       network.getCSRF((csrf: string) => {
         axios.post(process.env.REACT_APP_API_URL + '/user/get', {
@@ -55,7 +57,8 @@ const UserAPI = {
     });
   },
 
-  create(authToken: string, username: string, password: string) {
+  create(username: string, password: string) {
+    const authToken: string = store.getState().authState.authToken;
     return new Promise((resolve, reject) => {
       network.getCSRF((csrf: string) => {
         axios.post(process.env.REACT_APP_API_URL + '/user/create', {
@@ -77,11 +80,13 @@ const UserAPI = {
     });
   },
 
-  update(authToken: string) {
+  update() {
+    // const authToken: string = store.getState().authState.authToken;
     return '@TODO';
   },
 
-  destroy(authToken: string) {
+  destroy() {
+    const authToken: string = store.getState().authState.authToken;
     return new Promise((resolve, reject) => {
       network.getCSRF((csrf: string) => {
         axios.post(process.env.REACT_APP_API_URL + '/user/destroy', {

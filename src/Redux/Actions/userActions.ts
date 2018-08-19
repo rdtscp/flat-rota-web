@@ -5,8 +5,8 @@ import { SET_CURR_USER, SET_FLATS }                   from './actionTypes';
 
 import * as Models                                    from 'src/Models';
 
-const setCurrentUserAction = (authToken: string) => ((dispatch: Dispatch) => {
-    UserAPI.get(authToken)
+const setCurrentUserAction = () => ((dispatch: Dispatch) => {
+    UserAPI.get()
     .then((data: UserResponseData) => {
       // Received User Model.
       return dispatch({

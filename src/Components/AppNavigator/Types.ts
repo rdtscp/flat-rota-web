@@ -10,9 +10,8 @@ import * as Models                                    from 'src/Models';
 import { IAppNavigatorStyle }                         from './Styles';
 
 interface IAppNavigatorProps {
-  authState:            Models.AuthStateType;
   currentUser:          Models.User;
-  setCurrentUserAction: (authToken: string) => ((dispatch: Dispatch) => void);
+  setCurrentUserAction: () => ((dispatch: Dispatch) => void);
   setCurrentUserFlats:  (flats: Models.Flat[]) => ((dispatch: Dispatch) => void);
 }
 

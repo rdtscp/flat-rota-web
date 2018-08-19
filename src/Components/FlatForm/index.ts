@@ -8,7 +8,7 @@ import withStyles                                     from '@material-ui/core/st
 
 /* This Project */
 import * as Models                                    from 'src/Models';
-import { setCurrentUserAction }                       from 'src/State/Actions/userActions';
+import { setCurrentUserAction }                       from 'src/Redux/Actions/userActions';
 
 /* This Component */
 import FlatForm                                       from './FlatForm';

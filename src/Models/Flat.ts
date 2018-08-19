@@ -4,6 +4,7 @@ import axios, { AxiosResponse }                       from 'axios';
 
 /* This Project */
 import * as Models                                    from 'src/Models';
+import store                                          from 'src/Redux/Store';
 import network                                        from 'src/Resources/networkHelper';
 
 export {
@@ -35,7 +36,8 @@ type FlatResponseData = IFlatResponseData;
 
 const FlatAPI = {
 
-  get(authToken: string, flatID: string) {
+  get(flatID: string) {
+    const authToken: string = store.getState().authState.authToken;
     return new Promise((resolve, reject) => {
       network.getCSRF((csrf: string) => {
         axios.post(process.env.REACT_APP_API_URL + '/flat/get', {
@@ -56,7 +58,8 @@ const FlatAPI = {
     });
   },
 
-  create(authToken: string, flatName: string, flatMembers: string[]) {
+  create(flatName: string, flatMembers: string[]) {
+    const authToken: string = store.getState().authState.authToken;
     return new Promise((resolve, reject) => {
       network.getCSRF((csrf: string) => {
         axios.post(process.env.REACT_APP_API_URL + '/flat/create', {
@@ -78,11 +81,13 @@ const FlatAPI = {
     });
   },
 
-  update(authToken: string) {
+  update() {
+    // const authToken: string = store.getState().authState.authToken;
     return '@TODO';
   },
 
-  destroy(authToken: string) {
+  destroy() {
+    // const authToken: string = store.getState().authState.authToken;
     return '@TODO';
   },
 

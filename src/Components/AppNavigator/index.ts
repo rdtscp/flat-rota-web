@@ -8,7 +8,7 @@ import withStyles                                     from '@material-ui/core/st
 
 /* This Project */
 import * as Models                                    from 'src/Models';
-import { setCurrentUserAction, setCurrentUserFlats }  from 'src/State/Actions/userActions';
+import { setCurrentUserAction, setCurrentUserFlats }  from 'src/Redux/Actions/userActions';
 
 /* This Component */
 import AppNavigator                                   from './AppNavigator';
@@ -16,7 +16,6 @@ import { appNavigatorClasses }                        from './Styles';
 
 const mapStateToProps = (state: Models.StateType) => {
   return {
-    authState:    state.authState,
     currentUser:  state.currentUser,
   }
 }

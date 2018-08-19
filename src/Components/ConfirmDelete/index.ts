@@ -7,17 +7,11 @@ import { connect }                                    from 'react-redux';
 import withStyles                                     from '@material-ui/core/styles/withStyles';
 
 /* This Project */
-import * as Models                                    from 'src/Models';
-import { setAuthStateAction }                         from 'src/State/Actions/authActions';
+// import * as Models                                    from 'src/Models';
+import { setAuthStateAction }                         from 'src/Redux/Actions/authActions';
 
 /* This Component */
 import ConfirmDelete                                  from './ConfirmDelete';
 import { confirmDeleteClasses }                       from './Styles';
 
-const mapStateToProps = (state: Models.StateType) => {
-  return {
-    authState:  state.authState,
-  }
-}
-
-export default connect(mapStateToProps, { setAuthStateAction })(withStyles(confirmDeleteClasses)(ConfirmDelete));
+export default connect(null, { setAuthStateAction })(withStyles(confirmDeleteClasses)(ConfirmDelete));

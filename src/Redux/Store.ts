@@ -3,7 +3,7 @@ import { composeWithDevTools }                        from 'redux-devtools-exten
 import thunk                                          from 'redux-thunk';
 
 import * as Models                                    from 'src/Models';
-import { rootReducer }                                from 'src/State/Reducers';
+import { rootReducer }                                from 'src/Redux/Reducers';
 
 const intitialStore: Models.StateType = {
   authState: {

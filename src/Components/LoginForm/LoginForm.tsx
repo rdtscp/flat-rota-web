@@ -112,8 +112,7 @@ class LoginForm extends React.Component<LoginFormProps, LoginFormState> {
   }
 
   private login = () => {
-    const { authToken } = this.props.authState;
-    Models.DeviceAPI.create(authToken, this.state.username, this.state.password)
+    Models.DeviceAPI.create(this.state.username, this.state.password)
     .then(({ error, warning, message, content}: Models.DeviceResponseData) => {
       // Check that the Device was created successfully.
       if (content !== null && content !== undefined && 'authToken' in content) {
@@ -139,8 +138,7 @@ class LoginForm extends React.Component<LoginFormProps, LoginFormState> {
   }
 
   private register = () => {
-    const { authToken } = this.props.authState;
-    Models.UserAPI.create(authToken, this.state.username, this.state.password)
+    Models.UserAPI.create(this.state.username, this.state.password)
     .then(({ error, warning, message, content}: Models.UserResponseData) => {
       if (error) {
         alert('Error: ' + message);

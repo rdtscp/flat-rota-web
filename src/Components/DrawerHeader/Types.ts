@@ -19,6 +19,6 @@ interface IDrawerHeaderProps {
 // }
 
 type DrawerHeaderProps = IDrawerHeaderProps & IDrawerHeaderStyle;
-type DrawerHeaderState = {} & {}};
+type DrawerHeaderState = {} & {};
 
 export { DrawerHeaderProps, DrawerHeaderState };

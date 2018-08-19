@@ -1,7 +1,7 @@
 import { Reducer }                                    from 'redux';
 
 import * as Models                                    from 'src/Models';
-import { SET_CURR_USER, SET_FLATS }                   from 'src/State/Actions/actionTypes';
+import { SET_CURR_USER, SET_FLATS }                   from 'src/Redux/Actions/actionTypes';
 
 const initialState = {
 } as Models.User;

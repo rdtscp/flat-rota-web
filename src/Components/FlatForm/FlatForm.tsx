@@ -140,11 +140,10 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
       });
     }
     else {
-      const { authState } = this.props;
-      Models.FlatAPI.create(authState.authToken, this.state.newFlatName, this.state.newFlatMembers)
+      Models.FlatAPI.create(this.state.newFlatName, this.state.newFlatMembers)
       .then((data: Models.FlatResponseData) => {
         this.showSnackbar(data.message);
-        this.props.setCurrentUserAction(authState.authToken);
+        this.props.setCurrentUserAction();
       })
       .catch(error => this.showSnackbar(error.message));
     }

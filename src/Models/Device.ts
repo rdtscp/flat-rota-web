@@ -3,6 +3,7 @@ import axios, { AxiosResponse }                       from 'axios';
 import axiosRetry                                     from 'axios-retry';
 
 /* This Project */
+import store                                          from 'src/Redux/Store';
 import network                                        from 'src/Resources/networkHelper';
 
 interface IDeviceType {
@@ -54,7 +55,8 @@ export const DeviceAPI = {
     });
   },
 
-  create(authToken: string, username: string, password: string) {
+  create(username: string, password: string) {
+    const authToken: string = store.getState().authState.authToken;
     return new Promise((resolve, reject) => {
       axiosRetry(axios, { retries: 10 });
       network.getCSRF((csrf: string) => {
@@ -78,7 +80,8 @@ export const DeviceAPI = {
     });
   },
 
-  destroy(authToken: string, deviceID: string, deviceAuthToken: string) {
+  destroy(deviceID: string, deviceAuthToken: string) {
+    const authToken: string = store.getState().authState.authToken;
     return new Promise((resolve, reject) => {
       axiosRetry(axios, { retries: 10 });
       network.getCSRF((csrf: string) => {

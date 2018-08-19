@@ -110,7 +110,7 @@ class SettingsMenu extends React.Component<SettingsMenuProps, SettingsMenuState>
   }
 
   private logoutDevice = (deviceID: string, deviceAuthToken: string) => {
-    Models.DeviceAPI.destroy(this.props.authState.authToken, deviceID, deviceAuthToken)
+    Models.DeviceAPI.destroy(deviceID, deviceAuthToken)
     .then(({ error, warning, message, content }: Models.DeviceResponseData) => {
       if (error) {
         alert('Error: ' + message);

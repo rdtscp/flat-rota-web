@@ -189,7 +189,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     }));
   };
   private toggleSettings = () => {
-    this.props.setCurrentUserAction(this.props.authState.authToken);
+    this.props.setCurrentUserAction();
     if (this.state.settingsOpen === true) {
       this.setState({
         drawerOpen:   this.state.drawerWasOpen,
@@ -200,7 +200,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       this.setState({
         drawerOpen:     false,
         drawerWasOpen:  true,
-        settingsOpen: true
+        settingsOpen:   true
       });
     }
     else {
@@ -216,7 +216,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     console.log('State Holds ' + this.props.currentUser.flats.length + ' flats');
 
     const populatedFlats: Array<Promise<Models.Flat | null>> = this.props.currentUser.flats.map((flat: Models.Flat) => 
-    Models.FlatAPI.get(this.props.authState.authToken, flat.id)
+    Models.FlatAPI.get(flat.id)
       .then((data: Models.FlatResponseData) => data.content)
       .catch(error => null)
     );

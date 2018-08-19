@@ -4,13 +4,12 @@
 import { Dispatch }                                   from 'redux';
 
 /* This Project */
-import * as Models                                    from 'src/Models';
+// import * as Models                                    from 'src/Models';
 
 /* This Component */
 import { ILoginFormStyle }                            from './Styles';
 
 interface ILoginFormProps {
-  authState:                    Models.AuthStateType;
   setAuthStateAction:           (authToken: string) => ((dispatch: Dispatch) => void);
   setCurrentUserAction:         (authToken: string) => ((dispatch: Dispatch) => void);
 }

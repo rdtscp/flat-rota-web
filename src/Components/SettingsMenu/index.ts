@@ -8,8 +8,8 @@ import withStyles                                     from '@material-ui/core/st
 
 /* This Project */
 import * as Models                                    from 'src/Models';
-import { setAuthStateAction }                         from 'src/State/Actions/authActions';
-import { setCurrentUserAction }                       from 'src/State/Actions/userActions';
+import { setAuthStateAction }                         from 'src/Redux/Actions/authActions';
+import { setCurrentUserAction }                       from 'src/Redux/Actions/userActions';
 
 /* This Component */
 import SettingsMenu                                   from './SettingsMenu';

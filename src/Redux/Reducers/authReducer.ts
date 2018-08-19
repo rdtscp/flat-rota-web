@@ -1,7 +1,7 @@
 import { Reducer }                                    from 'redux';
 
 import * as Models                                    from 'src/Models';
-import { SET_AUTH }                                   from 'src/State/Actions/actionTypes';
+import { SET_AUTH }                                   from 'src/Redux/Actions/actionTypes';
 
 const initialState = {
     authStatus: false,
