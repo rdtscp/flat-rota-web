@@ -143,6 +143,14 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
       Models.FlatAPI.create(this.state.newFlatName, this.state.newFlatMembers)
       .then((data: Models.FlatResponseData) => {
         this.showSnackbar(data.message);
+        if ('error' in data && 'warning' in data && !data.error && !data.warning) {
+          this.setState({
+            newFlatMembers:     [ `${this.props.currentUser.username}` ],
+            newFlatName:        '',
+            newFlatNameInvalid: false,
+            newFlatNewMember:   '',
+          });
+        }
         this.props.setCurrentUserAction();
       })
       .catch(error => this.showSnackbar(error.message));
@@ -165,6 +173,9 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
 
   private addMember = () => {
     const newMembers = this.state.newFlatMembers;
+    if (this.state.newFlatNewMember === '') {
+      return;
+    }
     newMembers.push(this.state.newFlatNewMember)
     this.setState({
       newFlatMembers:     newMembers,
