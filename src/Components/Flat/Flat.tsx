@@ -50,8 +50,24 @@ class Flat extends React.Component<FlatProps, FlatState> {
   }
 
   private createItem = (event: React.MouseEvent<HTMLElement>) => {
-    alert('Popup to create new Item for Flat: ' + this.props.flat.id);
-    // Models.FlatAPI.create()
+    // alert('Popup to create new Item for Flat: ' + this.props.flat.id);
+    Models.ItemAPI.create(this.props.flat.id, 'Item Name', 'Test Price')
+    .then((data: Models.ItemResponseData) => {
+      // tslint:disable-next-line:no-console
+      console.log(data);
+      const newItem = data.content;
+      if (newItem !== null) {
+        Models.ItemAPI.update(newItem.id, this.props.flat.id)
+        .then((data2: Models.ItemResponseData) => {
+          // tslint:disable-next-line:no-console
+          console.log('Test Done: ' + data2);
+        })
+      }
+    })
+    .catch(error => {
+      // tslint:disable-next-line:no-console
+      console.log(error);
+    })
   }
 
 }
