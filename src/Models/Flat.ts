@@ -17,6 +17,7 @@ interface IFlatType {
   readonly members:     Models.User[];
   readonly id:          string;
   readonly name:        string;
+  readonly items:       Models.Item[];
 }
 
 type Flat = IFlatType;
