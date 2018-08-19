@@ -10,15 +10,18 @@ import * as Models                                    from "src/Models";
 import { IItemStyle }                                 from './Styles';
 
 interface IItemProps {
-  currentUser:            Models.User;
-  item:                   Models.Item;
-  flat:                   Models.Flat;
-  setCurrentUserFlats:    (flats: Models.Flat[]) => ((dispatch: Dispatch) => void);
+  currentUser:                Models.User;
+  item:                       Models.Item;
+  flat:                       Models.Flat;
+  setCurrentUserFlats:        (flats: Models.Flat[]) => ((dispatch: Dispatch) => void);
+  showSnackbar:               (message: string) => void;
 }
 
 interface IItemState {
-  anchorEl:       HTMLElement | null;
-  showName:       boolean;
+  anchorEl:                   HTMLElement | null;
+  confirmationDeleteItemOpen: boolean;
+  item:                       Models.Item;
+  showName:                   boolean;
 }
 
 type ItemProps = IItemProps & IItemStyle;
