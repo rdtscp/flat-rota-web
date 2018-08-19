@@ -14,6 +14,7 @@ interface IItemType {
   readonly description:   string;
   readonly rota:          Models.User[];
   readonly notification:  boolean;
+  readonly lastBumped:    number;
 }
 
 export type Item = IItemType;
@@ -65,33 +66,31 @@ export const ItemAPI = {
     });
   },
 
-  destroy() {
-    // const authToken: string = store.getState().authState.authToken;
-    return '@TODO';
-    // return new Promise((resolve, reject) => {
-    //   axiosRetry(axios, { retries: 10 });
-    //   network.getCSRF((csrf: string) => {
-    //     axiosRetry(axios, { retries: 0 });
-    //     axios.post(process.env.REACT_APP_API_URL + '/device/destroy', {
-    //       _csrf: csrf,
-    //       authToken,
-    //       deviceAuthToken,
-    //         deviceID,
-    //     },{
-    //       withCredentials: true,
-    //     })
-    //     .then((response: AxiosResponse) => {
-    //       const data: DeviceResponseData = response.data;
-    //       return resolve(data);
-    //     })
-    //     .catch((error) => {
-    //       return reject(error);
-    //     });
-    //   });
-    // });
+  destroy(itemID: string) {
+    const authToken: string = store.getState().authState.authToken;
+    return new Promise((resolve, reject) => {
+      axiosRetry(axios, { retries: 10 });
+      network.getCSRF((csrf: string) => {
+        axiosRetry(axios, { retries: 0 });
+        axios.post(process.env.REACT_APP_API_URL + '/item/destroy', {
+          _csrf: csrf,
+          authToken,
+          itemID
+        },{
+          withCredentials: true,
+        })
+        .then((response: AxiosResponse) => {
+          const data: ItemResponseData = response.data;
+          return resolve(data);
+        })
+        .catch((error) => {
+          return reject(error);
+        });
+      });
+    });
   },
 
-  update(itemID: string, flatID: string) {
+  update(itemID: string, description: string) {
     const authToken: string = store.getState().authState.authToken;
     return new Promise((resolve, reject) => {
       axiosRetry(axios, { retries: 10 });
@@ -100,8 +99,34 @@ export const ItemAPI = {
         axios.post(process.env.REACT_APP_API_URL + '/item/update', {
           _csrf: csrf,
           authToken,
-          flatID,
           itemID
+        },{
+          withCredentials: true,
+        })
+        .then((response: AxiosResponse) => {
+          const data: ItemResponseData = response.data;
+          return resolve(data);
+        })
+        .catch((error) => {
+          return reject(error);
+        });
+      });
+    });
+  },
+
+  setStatus(itemID: string, flatID: string, cleared: boolean, bump: boolean) {
+    const authToken: string = store.getState().authState.authToken;
+    return new Promise((resolve, reject) => {
+      axiosRetry(axios, { retries: 10 });
+      network.getCSRF((csrf: string) => {
+        axiosRetry(axios, { retries: 0 });
+        axios.post(process.env.REACT_APP_API_URL + '/item/setstatus', {
+          _csrf: csrf,
+          authToken,
+          bump,
+          cleared,
+          flatID,
+          itemID,
         },{
           withCredentials: true,
         })
