@@ -12,7 +12,7 @@ interface IItemType {
   readonly flat:          Models.Flat;
   readonly name:          string;
   readonly description:   string;
-  readonly rota:          Models.User[];
+  readonly rota:          string;
   readonly notification:  boolean;
   readonly lastBumped:    number;
 }
@@ -114,7 +114,7 @@ export const ItemAPI = {
     });
   },
 
-  setStatus(itemID: string, flatID: string, cleared: boolean, bump: boolean) {
+  setStatus(itemID: string, flatID: string, notification: boolean) {
     const authToken: string = store.getState().authState.authToken;
     return new Promise((resolve, reject) => {
       axiosRetry(axios, { retries: 10 });
@@ -123,10 +123,9 @@ export const ItemAPI = {
         axios.post(process.env.REACT_APP_API_URL + '/item/setstatus', {
           _csrf: csrf,
           authToken,
-          bump,
-          cleared,
           flatID,
           itemID,
+          notification,
         },{
           withCredentials: true,
         })
