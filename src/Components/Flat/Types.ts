@@ -1,5 +1,8 @@
 /* Components/SettingsMenu/Device/Types.ts */
 
+/* React/Redux/Other */
+import { Dispatch }                                   from 'redux';
+
 /* This Project */
 import * as Models                                    from "src/Models";
 
@@ -8,12 +11,18 @@ import { IFlatStyle }                                 from './Styles';
 
 interface IFlatProps {
   flat: Models.Flat;
+  setCurrentUserFlats:  (flats: Models.Flat[]) => ((dispatch: Dispatch) => void);
 }
 
-// interface IFlatState {
-// }
+interface IFlatState {
+  dialogOpen:       boolean;
+  newItemDesc:      string;
+  newItemName:      string;
+  snackbarMessage:  string;
+  snackbarOpen:     boolean;
+}
 
 type FlatProps = IFlatProps & IFlatStyle;
-type FlatState = {} & {};
+type FlatState = IFlatState & {};
 
 export { FlatProps, FlatState };

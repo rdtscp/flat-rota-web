@@ -10,8 +10,22 @@ const flatClasses = (theme: Theme) => createStyles({
     ...theme.typography.button,
     color:  'green',
   },
+  card: {
+    display: 'flex',
+    margin: 5,
+    paddingBottom: 10,
+    paddingTop: 10,
+  },
   chip: {
     margin: theme.spacing.unit,
+  },
+  closeSnackbar: {
+    height: theme.spacing.unit * 4,
+    width: theme.spacing.unit * 4,
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'row',
   },
   fab: { 
     bottom: theme.spacing.unit * 4,
@@ -21,6 +35,23 @@ const flatClasses = (theme: Theme) => createStyles({
   flatContainer: {
     alignItems:       'center',
     display:          'flex',
+    justifyContent:   'center',
+  },
+  itemControls: {
+    alignItems: 'center',
+    display: 'flex',
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+  },
+  itemText: {
+    flex: '1 0 auto',
+    paddingRight: 8,
+    width: 166
+  },
+  playIcon: {
+    height: 38,
+    width: 38,
   },
   root: {
     ...theme.mixins.gutters(),
