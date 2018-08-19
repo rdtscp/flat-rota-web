@@ -1,7 +1,7 @@
 /* Components/SettingsMenu/Device/Types.ts */
 
-// /* React/Redux/Other */
-// import { Dispatch }                                   from 'redux';
+/* React/Redux/Other */
+import { Dispatch }                                   from 'redux';
 
 /* This Project */
 import * as Models                                    from "src/Models";
@@ -10,7 +10,10 @@ import * as Models                                    from "src/Models";
 import { IItemStyle }                                 from './Styles';
 
 interface IItemProps {
-  item: Models.Item;
+  currentUser:            Models.User;
+  item:                   Models.Item;
+  flat:                   Models.Flat;
+  setCurrentUserFlats:    (flats: Models.Flat[]) => ((dispatch: Dispatch) => void);
 }
 
 interface IItemState {
