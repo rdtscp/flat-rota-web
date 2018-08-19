@@ -14,7 +14,8 @@ interface IItemProps {
 }
 
 interface IItemState {
-  showName: boolean;
+  anchorEl:       HTMLElement | null;
+  showName:       boolean;
 }
 
 type ItemProps = IItemProps & IItemStyle;
