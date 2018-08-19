@@ -5,31 +5,13 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import AppBar                                         from '@material-ui/core/AppBar';
-import Collapse                                       from '@material-ui/core/Collapse';
-import Divider                                        from '@material-ui/core/Divider';
-import Drawer                                         from '@material-ui/core/Drawer';
-import Hidden                                         from '@material-ui/core/Hidden';
-import IconButton                                     from '@material-ui/core/IconButton';
-import List                                           from '@material-ui/core/List';
-import ListItem                                       from '@material-ui/core/ListItem';
-import ListItemIcon                                   from '@material-ui/core/ListItemIcon';
-import ListItemText                                   from '@material-ui/core/ListItemText';
-import ListSubheader                                  from '@material-ui/core/ListSubheader';
-import Menu                                           from '@material-ui/core/Menu';
-import MenuItem                                       from '@material-ui/core/MenuItem';
-import Slide                                          from '@material-ui/core/Slide';
-import Toolbar                                        from '@material-ui/core/Toolbar';
-import Typography                                     from '@material-ui/core/Typography';
-import AddCircleIcon                                  from '@material-ui/icons/AddCircle';
-import ExpandLessIcon                                 from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon                                 from '@material-ui/icons/ExpandMore';
-import GroupAddIcon                                   from '@material-ui/icons/GroupAdd';
-import HomeIcon                                       from '@material-ui/icons/Home';
-import ListIcon                                       from '@material-ui/icons/List';
-import LocationOnIcon                                 from '@material-ui/icons/LocationOn';
-import MenuIcon                                       from '@material-ui/icons/Menu';
-import WarningIcon                                    from '@material-ui/icons/Warning';
+import {
+  AppBar, Collapse, Divider, Drawer, Hidden,
+  IconButton, List, ListItem, ListItemIcon,
+  ListItemText, ListSubheader, Menu, MenuItem,
+  Slide, Toolbar, Typography
+}                                                     from '@material-ui/core';
+import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
 import DrawerHeader                                   from 'src/Components/DrawerHeader';
@@ -69,30 +51,30 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
         <List subheader={<ListSubheader component="div">Your Account</ListSubheader>}>
           <ListItem id="createFlat" onClick={this.clickDrawer} button={true}>
             <ListItemIcon>
-              <AddCircleIcon />
+              <Icons.AddCircle />
             </ListItemIcon>
             <ListItemText primary="Create New Flat" />
           </ListItem>
           <ListItem id="yourTodos"  onClick={this.clickDrawer} button={true}>
             <ListItemIcon>
-              <ListIcon />
+              <Icons.List />
             </ListItemIcon>
             <ListItemText primary="Your Todos" />
           </ListItem>
           <Divider />
           <ListItem button={true} onClick={this.toggleFlatList}>
             <ListItemIcon>
-              <HomeIcon />
+              <Icons.Home />
             </ListItemIcon>
             <ListItemText inset={true} primary="Flats" />
-            {flatListOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            {flatListOpen ? <Icons.ExpandLess /> : <Icons.ExpandMore />}
           </ListItem>
           <Collapse in={flatListOpen} timeout="auto" unmountOnExit={true}>
             <List component="div" disablePadding={true}>
               {currentUser.flats.map((flat: Models.Flat, index: number) => (
                 <ListItem id={flat.id} onClick={this.clickDrawer} key={index} className={classes.nested} button={true}>
                   <ListItemIcon>
-                    <LocationOnIcon />
+                    <Icons.LocationOn />
                   </ListItemIcon>
                   <ListItemText primary={flat.name} />
                 </ListItem>
@@ -141,7 +123,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
         <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton color="inherit" aria-label="Open drawer" onClick={this.toggleDrawer} className={classes.navIconHide}>
-              <MenuIcon />
+              <Icons.Menu />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap={true} style={{flexGrow: 1}}>
               {paneTitle}
@@ -149,7 +131,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
             {(activePane !== 'yourTodos' && activePane !== 'createFlat') ? (
               <React.Fragment>
                 <IconButton color="inherit" onClick={this.addMembersFlat}>
-                  <GroupAddIcon /> 
+                  <Icons.GroupAdd /> 
                 </IconButton>
                 <div>
                   <IconButton
@@ -158,7 +140,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
                     onClick={this.openFlatOptions}
                     color="inherit"
                     >
-                    <WarningIcon />
+                    <Icons.Warning />
                   </IconButton>
                   <Menu id="menu-appbar" anchorEl={this.state.anchorEl} anchorOrigin={{ horizontal: 'right', vertical: 'top', }} transformOrigin={{ horizontal: 'right', vertical: 'top', }} open={flatOptsOpen} onClose={this.clickFlatOption} >
                     <MenuItem id="leaveFlat" onClick={this.clickFlatOption}>Leave Flat</MenuItem>

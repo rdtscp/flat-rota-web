@@ -2,20 +2,12 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import Button                                         from '@material-ui/core/Button';
-import Chip                                           from '@material-ui/core/Chip';
-import Fade                                           from '@material-ui/core/Fade';
-import FormControl                                    from '@material-ui/core/FormControl';
-import Icon                                           from '@material-ui/core/Icon';
-import IconButton                                     from '@material-ui/core/IconButton';
-import Input                                          from '@material-ui/core/Input';
-import InputAdornment                                 from '@material-ui/core/InputAdornment';
-import InputLabel                                     from '@material-ui/core/InputLabel';
-import Paper                                          from '@material-ui/core/Paper';
-import Snackbar                                       from '@material-ui/core/Snackbar';
-import Typography                                     from '@material-ui/core/Typography';
-import AddCircleIcon                                  from '@material-ui/icons/AddCircle';
-import CloseIcon                                      from '@material-ui/icons/Close';
+import {
+  Button, Chip, Fade, FormControl, Icon,
+  IconButton, Input, InputAdornment, InputLabel,
+  Paper, Snackbar, Typography
+}                                                     from '@material-ui/core';
+import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
 import * as Models                                    from 'src/Models';
@@ -68,7 +60,7 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
                     aria-label="Add member to group"
                     onClick={this.addMember}
                   >
-                    <AddCircleIcon />
+                    <Icons.AddCircle />
                   </IconButton>
                 </InputAdornment>
               }
@@ -132,7 +124,7 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
               className={classes.closeSnackbar}
               onClick={this.hideSnackbar}
             >
-              <CloseIcon />
+              <Icons.Close />
             </IconButton>,
           ]}
         />

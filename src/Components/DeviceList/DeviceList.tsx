@@ -5,15 +5,17 @@ import * as React                                     from 'react';
 import { UAParser }                                   from 'ua-parser-js';
 
 /* Material-UI */
-import Button                                         from '@material-ui/core/Button';
-import Dialog                                         from '@material-ui/core/Dialog';
-import DialogActions                                  from '@material-ui/core/DialogActions';
-import DialogContent                                  from '@material-ui/core/DialogContent';
-import DialogContentText                              from '@material-ui/core/DialogContentText';
-import DialogTitle                                    from '@material-ui/core/DialogTitle';
-import Fade                                           from '@material-ui/core/Fade';
-import IconButton                                     from '@material-ui/core/IconButton';
-import Snackbar                                       from '@material-ui/core/Snackbar';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Fade,
+  IconButton,
+  Snackbar,
+}                                                     from '@material-ui/core';
 import CloseIcon                                      from '@material-ui/icons/Close';
 
 /* This Project */

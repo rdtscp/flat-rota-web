@@ -5,8 +5,8 @@ import classNames                                     from 'classnames';
 import * as React                                     from 'react';
 
 /* Material-UI */
-import IconButton                                     from '@material-ui/core/IconButton';
-import Typography                                     from '@material-ui/core/Typography';
+
+import { IconButton, Typography }                     from '@material-ui/core';
 import SettingsRoundedIcon                            from '@material-ui/icons/SettingsRounded';
 
 /* This Component */

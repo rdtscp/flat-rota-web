@@ -4,13 +4,15 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import Button                                         from '@material-ui/core/Button';
-import Paper                                          from '@material-ui/core/Paper';
-import Step                                           from '@material-ui/core/Step';
-import StepContent                                    from '@material-ui/core/StepContent';
-import StepLabel                                      from '@material-ui/core/StepLabel';
-import Stepper                                        from '@material-ui/core/Stepper';
-import Typography                                     from '@material-ui/core/Typography';
+import {
+  Button,
+  Paper,
+  Step,
+  StepContent,
+  StepLabel,
+  Stepper,
+  Typography
+}                                                     from '@material-ui/core';
 
 /* This Project */
 import * as Models                                    from 'src/Models';

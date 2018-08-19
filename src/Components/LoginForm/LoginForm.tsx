@@ -4,17 +4,10 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import Button                                         from '@material-ui/core/Button';
-import Fade                                           from '@material-ui/core/Fade';
-import FormControl                                    from '@material-ui/core/FormControl';
-import IconButton                                     from '@material-ui/core/IconButton';
-import Input                                          from '@material-ui/core/Input';
-import InputAdornment                                 from '@material-ui/core/InputAdornment';
-import InputLabel                                     from '@material-ui/core/InputLabel';
-import Snackbar                                       from '@material-ui/core/Snackbar';
-import CloseIcon                                      from '@material-ui/icons/Close';
-import Visibility                                     from '@material-ui/icons/Visibility';
-import VisibilityOff                                  from '@material-ui/icons/VisibilityOff';
+import { Button, Fade, FormControl, IconButton,
+Input, InputAdornment, InputLabel, Snackbar
+}                                                     from '@material-ui/core';
+import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
 import * as Models                                    from 'src/Models';
@@ -72,7 +65,7 @@ class LoginForm extends React.Component<LoginFormProps, LoginFormState> {
                       onClick={this.handleClickShowPassword}
                       onMouseDown={this.handleMouseDownPassword}
                     >
-                      {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                      {this.state.showPassword ? <Icons.VisibilityOff /> : <Icons.Visibility />}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -110,7 +103,7 @@ class LoginForm extends React.Component<LoginFormProps, LoginFormState> {
               className={classes.close}
               onClick={this.hideSnackbar}
             >
-              <CloseIcon />
+              <Icons.Close />
             </IconButton>,
           ]}
         />

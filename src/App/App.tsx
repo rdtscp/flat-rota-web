@@ -4,9 +4,11 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import CircularProgress                               from '@material-ui/core/CircularProgress';
-import CssBaseline                                    from '@material-ui/core/CssBaseline';
-import LinearProgress                                 from '@material-ui/core/LinearProgress';
+import { 
+  CircularProgress,
+  CssBaseline,
+  LinearProgress
+}                                                     from '@material-ui/core';
 import { MuiThemeProvider }                           from '@material-ui/core/styles';
 
 /* This Project */

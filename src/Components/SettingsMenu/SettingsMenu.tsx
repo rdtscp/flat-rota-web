@@ -4,21 +4,12 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import AppBar                                         from '@material-ui/core/AppBar';
-import Button                                         from '@material-ui/core/Button';
-import Dialog                                         from '@material-ui/core/Dialog';
-import DialogActions                                  from '@material-ui/core/DialogActions';
-import DialogTitle                                    from '@material-ui/core/DialogTitle';
-import ExpansionPanel                                 from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails                          from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary                          from '@material-ui/core/ExpansionPanelSummary';
-import IconButton                                     from '@material-ui/core/IconButton';
-import Toolbar                                        from '@material-ui/core/Toolbar';
-import Typography                                     from '@material-ui/core/Typography';
-import ArrowBackIcon                                  from '@material-ui/icons/ArrowBack';
-import DeleteForeverIcon                              from '@material-ui/icons/DeleteForever';
-import ExpandMoreIcon                                 from '@material-ui/icons/ExpandMore';
-import SmartphoneIcon                                 from '@material-ui/icons/Smartphone';
+import { AppBar, Button, Dialog, DialogActions,
+  DialogTitle, ExpansionPanel, ExpansionPanelDetails,
+  ExpansionPanelSummary, IconButton, Toolbar,
+  Typography
+}                                                     from '@material-ui/core';
+import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
 import ConfirmDelete                                  from 'src/Components/ConfirmDelete';
@@ -45,7 +36,7 @@ class SettingsMenu extends React.Component<SettingsMenuProps, SettingsMenuState>
         <AppBar color="default" position="static">
           <Toolbar>
             <IconButton onClick={this.props.closeSettings} className={classes.menuButton} color="inherit" aria-label="Menu">
-              <ArrowBackIcon />
+              <Icons.ArrowBack />
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
               Settings
@@ -57,8 +48,8 @@ class SettingsMenu extends React.Component<SettingsMenuProps, SettingsMenuState>
         </AppBar>
 
         <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <SmartphoneIcon /> &nbsp;&nbsp;&nbsp;
+          <ExpansionPanelSummary expandIcon={<Icons.ExpandMore />}>
+            <Icons.Smartphone /> &nbsp;&nbsp;&nbsp;
             <Typography className={classes.heading}> Device Settings</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -67,8 +58,8 @@ class SettingsMenu extends React.Component<SettingsMenuProps, SettingsMenuState>
         </ExpansionPanel>
 
         <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <DeleteForeverIcon /> &nbsp;&nbsp;&nbsp;
+          <ExpansionPanelSummary expandIcon={<Icons.ExpandMore />}>
+            <Icons.DeleteForever /> &nbsp;&nbsp;&nbsp;
             <Typography className={classes.heading}>Delete Account</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>

@@ -14,8 +14,8 @@ import ExpansionPanelSummary                          from '@material-ui/core/Ex
 // import ListItemText                                   from '@material-ui/core/ListItemText';
 // import Paper                                          from '@material-ui/core/Paper';
 import Typography                                     from '@material-ui/core/Typography';
-import AddIcon                                        from '@material-ui/icons/Add';
-import ExpandMoreIcon                                 from '@material-ui/icons/ExpandMore';
+
+import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
 import * as Models                                    from "src/Models";
@@ -32,7 +32,7 @@ class Flat extends React.Component<FlatProps, FlatState> {
       <div className={classes.flatContainer}>
         <div style={{ width: '100%' }}>
           <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <ExpansionPanelSummary expandIcon={<Icons.ExpandMore />}>
               <Typography variant="title"> Flat Members </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
@@ -42,7 +42,7 @@ class Flat extends React.Component<FlatProps, FlatState> {
             </ExpansionPanelDetails>
           </ExpansionPanel>
           <Button variant="fab" className={classes.fab} color="primary" onClick={this.createItem} >
-            <AddIcon />
+            <Icons.Add />
           </Button>
         </div>
       </div>
