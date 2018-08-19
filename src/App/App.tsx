@@ -49,7 +49,7 @@ class App extends React.Component<AppProps> {
       );
     }
     else if (authState.authStatus === true && currentUser.id === '') {
-      this.props.setCurrentUserAction(authState.authToken);
+      this.props.setCurrentUserAction();
       return (
         <MuiThemeProvider theme={appTheme}>
           <CssBaseline />

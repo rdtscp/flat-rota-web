@@ -137,8 +137,8 @@ class DeviceList extends React.Component<DeviceListProps, DeviceListState> {
       }
       else {
         this.setState({ confirmationSnackbarOpen: true });
-        this.props.setCurrentUserAction(this.props.authState.authToken);
-      }      
+      }
+      this.props.setCurrentUserAction();
     })
     .catch((err: any) => {
       alert('Unexpected Error, Please Refresh & Try Again');

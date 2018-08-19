@@ -115,15 +115,17 @@ class SettingsMenu extends React.Component<SettingsMenuProps, SettingsMenuState>
       if (error) {
         alert('Error: ' + message);
         this.props.setAuthStateAction('');
+        this.props.setCurrentUserAction();
       }
       else if (warning) {
         alert('Warning: ' + message);
       }
       else if (this.props.authState.authToken === deviceAuthToken) {
         this.props.setAuthStateAction('');
+        this.props.setCurrentUserAction();
       }
       else {
-        this.props.setCurrentUserAction(this.props.authState.authToken);
+        this.props.setCurrentUserAction();
       }
     })
     .catch((err: any) => {

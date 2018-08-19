@@ -12,7 +12,7 @@ import { IAppStyle }                                  from './Styles';
 interface IAppProps {
   authState:            Models.AuthStateType;
   currentUser:          Models.User;
-  setCurrentUserAction: (authToken: string) => ((dispatch: Dispatch) => void);
+  setCurrentUserAction: () => ((dispatch: Dispatch) => void);
   setAuthStateAction:   (authToken: string) => ((dispatch: Dispatch) => void);
 }
 

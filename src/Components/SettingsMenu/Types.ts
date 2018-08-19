@@ -14,7 +14,7 @@ interface ISettingsMenuProps {
   authState:            Models.AuthStateType;
   devices:              Models.Device[];
   setAuthStateAction:   (authToken: string) => ((dispatch: Dispatch) => void);
-  setCurrentUserAction: (authToken: string) => ((dispatch: Dispatch) => void);
+  setCurrentUserAction: () => ((dispatch: Dispatch) => void);
 }
 
 interface ISettingsMenuState {
