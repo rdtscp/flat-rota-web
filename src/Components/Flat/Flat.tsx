@@ -5,7 +5,7 @@ import * as React from 'react';
 
 /* Material-UI */
 import { Button, Chip, Dialog, DialogActions, 
-  DialogContent, DialogContentText, DialogTitle,
+  DialogContent, DialogTitle,
   ExpansionPanel, ExpansionPanelDetails,  ExpansionPanelSummary, Fade,
   FormControl, IconButton, Input, InputLabel, Snackbar, Typography
 }                                                     from '@material-ui/core';
@@ -33,7 +33,11 @@ class Flat extends React.Component<FlatProps, FlatState> {
 
   public render() {
     const { classes } = this.props;
+
     const thisFlat: Models.Flat = this.props.flat;
+    // const sortedFlats = thisFlat.items.sort((a, b) => {
+    //   return (+(a > b.value) || +(a.value === b.value) - 1) || (+(a.secondaryValue > b.secondaryValue) || +(a.secondaryValue === b.secondaryValue) - 1);
+    // });
     return (
       <div className={classes.flatContainer}>
         <div style={{ width: 327 }}>
@@ -51,7 +55,7 @@ class Flat extends React.Component<FlatProps, FlatState> {
           </ExpansionPanel>
           {thisFlat.items.map((item: Models.Item, index: number) => (
             <React.Fragment key={index}>
-              <Item item={item} flat={this.props.flat} />
+              <Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
             </React.Fragment>
           ))}
           <Button variant="fab" className={classes.fab} color="primary" onClick={this.toggleNewItemDialog} >
@@ -63,34 +67,32 @@ class Flat extends React.Component<FlatProps, FlatState> {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">{"Create a new Item"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Create New Item"}</DialogTitle>
             <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                <div style={{width: 223}}>
-                    <FormControl>
-                    <InputLabel htmlFor="newItemName">Item Name</InputLabel>
-                    <Input
-                      id="newItemName"
-                      type="text"
-                      required={true}
-                      value={this.state.newItemName}
-                      onChange={this.handleChange}
-                      style={{width: 223}}
-                    />
-                  </FormControl>
+              <div style={{width: 223}}>
                   <FormControl>
-                    <InputLabel htmlFor="newItemDesc">Item Description</InputLabel>
-                    <Input
-                      id="newItemDesc"
-                      type="text"
-                      value={this.state.newItemDesc}
-                      onChange={this.handleChange}
-                      multiline={true}
-                      style={{width: 223}}
-                      />
-                  </FormControl>
-                </div>
-              </DialogContentText>
+                  <InputLabel htmlFor="newItemName">Item Name</InputLabel>
+                  <Input
+                    id="newItemName"
+                    type="text"
+                    required={true}
+                    value={this.state.newItemName}
+                    onChange={this.handleChange}
+                    style={{width: 223}}
+                  />
+                </FormControl>
+                <FormControl>
+                  <InputLabel htmlFor="newItemDesc">Item Description</InputLabel>
+                  <Input
+                    id="newItemDesc"
+                    type="text"
+                    value={this.state.newItemDesc}
+                    onChange={this.handleChange}
+                    multiline={true}
+                    style={{width: 223}}
+                    />
+                </FormControl>
+              </div>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.toggleNewItemDialog} color="primary">
