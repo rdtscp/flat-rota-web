@@ -1,4 +1,4 @@
-// /* React/Redux/Other */
+/* React/Redux/Other */
 import { Dispatch }                                   from 'redux';
 
 /* This Project */
