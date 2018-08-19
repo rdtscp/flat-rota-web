@@ -14,8 +14,6 @@ export {
 
 interface IFlatType {
   readonly members:     Models.User[];
-  readonly createdAt:   number;
-  readonly updatedAt:   number;
   readonly id:          string;
   readonly name:        string;
 }

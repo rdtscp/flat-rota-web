@@ -11,11 +11,9 @@ const intitialStore: Models.StateType = {
     authToken:  '',
   },
   currentUser: {
-    createdAt:  0,
     devices:    [],
     flats:      [],
     id:         '',
-    updatedAt:  0,
     username:   '',
   }
 };

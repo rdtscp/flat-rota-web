@@ -13,8 +13,6 @@ export {
 
 interface IUserType {
   readonly devices:     Models.Device[];
-  readonly createdAt:   number;
-  readonly updatedAt:   number;
   readonly id:          string;
   readonly username:    string;
   readonly flats:       Models.Flat[];

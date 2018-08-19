@@ -6,8 +6,6 @@ import axiosRetry                                     from 'axios-retry';
 import network                                        from 'src/Resources/networkHelper';
 
 interface IDeviceType {
-  readonly createdAt:   number;
-  readonly updatedAt:   number;
   readonly id:          string;
   readonly lastUsed:    number;
   readonly authToken:   string;
