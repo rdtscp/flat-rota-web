@@ -239,11 +239,11 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
   }
 
   private addMembersFlat  = (event: React.MouseEvent<HTMLElement>) => {
-    alert('Popup to Handle Adding Members to Flat: ' + this.state.activePane);
+    alert('Adding Members Coming Soon...');
   }
   private clickFlatOption = (event: React.MouseEvent<HTMLElement>) => {
     if (event.currentTarget.id !== '') {
-      alert('Clicked Flat Option: ' + event.currentTarget.id + ' for flat: ' + this.state.activePane);
+      alert('This feature is coming soon.');
     }      
     this.setState({ anchorEl: null });
   }
