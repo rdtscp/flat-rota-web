@@ -39,6 +39,10 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     };
   }
 
+  public componentWillMount() {
+    this.fetchFlatData();
+  }
+
   public render() {
     const { classes, currentUser } = this.props;
     const { activePane, drawerOpen, flatListOpen, settingsOpen } = this.state;
@@ -212,17 +216,20 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     }
   };
   private toggleFlatList = (event: React.MouseEvent<HTMLElement>) => {
+    this.fetchFlatData();
+    this.setState({
+      flatListOpen: !this.state.flatListOpen
+    });
+  }
+  private fetchFlatData = () => {
     const populatedFlats: Array<Promise<Models.Flat | null>> = this.props.currentUser.flats.map((flat: Models.Flat) => 
-    Models.FlatAPI.get(flat.id)
+      Models.FlatAPI.get(flat.id)
       .then((data: Models.FlatResponseData) => data.content)
       .catch(error => null)
     );
     Promise.all(populatedFlats)
     .then(flats => {
       this.props.setCurrentUserFlats(flats as Models.Flat[]);
-    })
-    this.setState({
-      flatListOpen: !this.state.flatListOpen
     });
   }
   private openFlatOptions = (event: React.MouseEvent<HTMLElement>) => {
