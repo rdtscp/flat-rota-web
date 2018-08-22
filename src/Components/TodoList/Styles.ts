@@ -10,17 +10,15 @@ const todoListClasses = (theme: Theme) => createStyles({
     height: theme.spacing.unit * 4,
     width: theme.spacing.unit * 4,
   },
-  devicesContainer: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 10,
-    maxWidth: 355,
-    minWidth: 327,
+  closeSnackbar: {
+    height: theme.spacing.unit * 4,
+    width: theme.spacing.unit * 4,
   },
-  snackbar: {
-    position: 'absolute',
+  todoContainer: {
+    alignItems:       'center',
+    display:          'flex',
+    justifyContent:   'center',
   },
-  snackbarContent: {},
 });
 
 interface ITodoListStyle extends WithStyles<typeof todoListClasses> {};
