@@ -9,6 +9,7 @@ import { IFlatFormStyle }                             from './Styles';
 
 interface IFlatFormProps {
   currentUser:          Models.User;
+  closeFlatList :       () => void;
   setCurrentUserAction: () => ((dispatch: Dispatch) => void);
 }
 

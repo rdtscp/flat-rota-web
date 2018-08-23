@@ -152,6 +152,7 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
           });
         }
         this.props.setCurrentUserAction();
+        this.props.closeFlatList();
       })
       .catch(error => this.showSnackbar(error.message));
     }
