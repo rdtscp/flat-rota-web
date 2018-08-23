@@ -29,7 +29,7 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
 
   public render() {
     const { classes, currentUser, flats } = this.props; 
-    if (!('items' in flats[0])) {
+    if (flats[0] !== undefined && !('items' in flats[0])) {
       const populatedFlats: Array<Promise<Models.Flat | null>> = flats.map((flat: Models.Flat) => 
         Models.FlatAPI.get(flat.id)
         .then((data: Models.FlatResponseData) => data.content)
@@ -41,10 +41,10 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
       })
       return (
         <div className={classes.loadingContainer}>
-            <div style={{width: 56.56}}>
-              <CircularProgress color="primary"/>
-            </div>
+          <div style={{width: 56.56}}>
+            <CircularProgress color="primary"/>
           </div>
+        </div>
       );
     }
     else {
@@ -57,6 +57,13 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
         });
         items = items.concat(yourItems);
       });
+      if (items.length === 0) {
+        return (
+          <Typography variant="headline" gutterBottom={true}>
+            You have nothing to do!
+          </Typography>
+        );
+      }
       return (
         <div className={classes.todoContainer}>
           <div style={{ width: 327 }}>
@@ -79,7 +86,7 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
                 );
               }
               else {
-                return (<React.Fragment>{/*  */}</React.Fragment>);
+                return (<React.Fragment key={flatIndex}>{/*  */}</React.Fragment>);
               }
             })}
           </div>

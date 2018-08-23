@@ -49,6 +49,12 @@ const flatClasses = (theme: Theme) => createStyles({
     paddingRight: 8,
     width: 166
   },
+  loadingContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    height: '100%',
+    justifyContent: 'center',
+  },
   playIcon: {
     height: 38,
     width: 38,

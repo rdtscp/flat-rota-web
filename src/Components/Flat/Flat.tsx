@@ -4,7 +4,7 @@
 import * as React from 'react';
 
 /* Material-UI */
-import { Button, Chip, Dialog, DialogActions, 
+import { Button, Chip, CircularProgress, Dialog, DialogActions, 
   DialogContent, DialogTitle,
   ExpansionPanel, ExpansionPanelDetails,  ExpansionPanelSummary, Fade,
   FormControl, IconButton, Input, InputLabel, Snackbar, Typography
@@ -35,108 +35,207 @@ class Flat extends React.Component<FlatProps, FlatState> {
     const { classes } = this.props;
 
     const thisFlat: Models.Flat = this.props.flat;
-    const hasNotificationItems = thisFlat.items.filter(item => item.notification === true);
-    const nonNotificationItems = thisFlat.items.filter(item => item.notification === false);
-    hasNotificationItems.sort((a, b) => b.lastBumped - a.lastBumped);
-    nonNotificationItems.sort((a, b) => b.lastBumped - a.lastBumped);
-    return (
-      <div className={classes.flatContainer}>
-        <div style={{ width: 327 }}>
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<Icons.ExpandMore />}>
-              <Typography variant="headline"> Flat Members </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-                {thisFlat.members.map((member, index) =>
-                  <React.Fragment key={index}>
-                    <Chip label={member.username} className={classes.chip} color="primary" />
-                  </React.Fragment>
-                )}
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          {hasNotificationItems.map((item: Models.Item, index: number) => (
-            <React.Fragment key={index}>
-              <Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
-            </React.Fragment>
-          ))}
-          {nonNotificationItems.reverse().map((item: Models.Item, index: number) => (
-            <React.Fragment key={index}>
-              <Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
-            </React.Fragment>
-          ))}
-          <Button variant="fab" className={classes.fab} color="primary" onClick={this.toggleNewItemDialog} >
-            <Icons.Add />
-          </Button>
-          <Dialog
-            open={this.state.dialogOpen}
-            // onClose={this.handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">{"Create New Item"}</DialogTitle>
-            <DialogContent>
-              <div style={{width: 223}}>
+    if (thisFlat.items !== undefined) {
+      const hasNotificationItems = thisFlat.items.filter(item => item.notification === true);
+      const nonNotificationItems = thisFlat.items.filter(item => item.notification === false);
+      hasNotificationItems.sort((a, b) => b.lastBumped - a.lastBumped);
+      nonNotificationItems.sort((a, b) => b.lastBumped - a.lastBumped);
+      return (
+        <div className={classes.flatContainer}>
+          <div style={{ width: 327 }}>
+            <ExpansionPanel>
+              <ExpansionPanelSummary expandIcon={<Icons.ExpandMore />}>
+                <Typography variant="headline"> Flat Members </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                  {thisFlat.members.map((member, index) =>
+                    <React.Fragment key={index}>
+                      <Chip label={member.username} className={classes.chip} color="primary" />
+                    </React.Fragment>
+                  )}
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            {hasNotificationItems.map((item: Models.Item, index: number) => (
+              <React.Fragment key={index}>
+                <Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
+              </React.Fragment>
+            ))}
+            {nonNotificationItems.reverse().map((item: Models.Item, index: number) => (
+              <React.Fragment key={index}>
+                <Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
+              </React.Fragment>
+            ))}
+            <Button variant="fab" className={classes.fab} color="primary" onClick={this.toggleNewItemDialog} >
+              <Icons.Add />
+            </Button>
+            <Dialog
+              open={this.state.dialogOpen}
+              // onClose={this.handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+              >
+              <DialogTitle id="alert-dialog-title">{"Create New Item"}</DialogTitle>
+              <DialogContent>
+                <div style={{width: 223}}>
+                    <FormControl>
+                    <InputLabel htmlFor="newItemName">Item Name</InputLabel>
+                    <Input
+                      id="newItemName"
+                      type="text"
+                      required={true}
+                      value={this.state.newItemName}
+                      onChange={this.handleChange}
+                      style={{width: 223}}
+                      />
+                  </FormControl>
                   <FormControl>
-                  <InputLabel htmlFor="newItemName">Item Name</InputLabel>
-                  <Input
-                    id="newItemName"
-                    type="text"
-                    required={true}
-                    value={this.state.newItemName}
-                    onChange={this.handleChange}
-                    style={{width: 223}}
-                  />
-                </FormControl>
-                <FormControl>
-                  <InputLabel htmlFor="newItemDesc">Item Description</InputLabel>
-                  <Input
-                    id="newItemDesc"
-                    type="text"
-                    value={this.state.newItemDesc}
-                    onChange={this.handleChange}
-                    multiline={true}
-                    style={{width: 223}}
-                    />
-                </FormControl>
-              </div>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.toggleNewItemDialog} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={this.createItem} color="primary" autoFocus={true}>
-                Create
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-        <Snackbar
-          anchorOrigin={{
-            horizontal: 'right',
-            vertical: 'bottom',
-          }}
-          open={this.state.snackbarOpen}
-          autoHideDuration={3000}
-          onClose={this.hideSnackbar}
-          ContentProps={{
-            'aria-describedby': 'message-id',
-          }}
-          message={<span id="message-id">{this.state.snackbarMessage}</span>}
-          TransitionComponent={Fade}
-          action={[
-            <IconButton
+                    <InputLabel htmlFor="newItemDesc">Item Description</InputLabel>
+                    <Input
+                      id="newItemDesc"
+                      type="text"
+                      value={this.state.newItemDesc}
+                      onChange={this.handleChange}
+                      multiline={true}
+                      style={{width: 223}}
+                      />
+                  </FormControl>
+                </div>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.toggleNewItemDialog} color="primary">
+                  Cancel
+                </Button>
+                <Button onClick={this.createItem} color="primary" autoFocus={true}>
+                  Create
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+          <Snackbar
+            anchorOrigin={{
+              horizontal: 'right',
+              vertical: 'bottom',
+            }}
+            open={this.state.snackbarOpen}
+            autoHideDuration={3000}
+            onClose={this.hideSnackbar}
+            ContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            message={<span id="message-id">{this.state.snackbarMessage}</span>}
+            TransitionComponent={Fade}
+            action={[
+              <IconButton
               key="close"
               aria-label="Close"
               color="inherit"
               className={classes.closeSnackbar}
               onClick={this.hideSnackbar}
-            >
-              <Icons.Close />
-            </IconButton>,
-          ]}
-        />
-      </div>
-    );
+              >
+                <Icons.Close />
+              </IconButton>,
+            ]}
+            />
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className={classes.flatContainer}>
+          <div style={{ width: 327 }}>
+            <ExpansionPanel>
+              <ExpansionPanelSummary expandIcon={<Icons.ExpandMore />}>
+                <Typography variant="headline"> Flat Members </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                  {thisFlat.members.map((member, index) =>
+                    <React.Fragment key={index}>
+                      <Chip label={member.username} className={classes.chip} color="primary" />
+                    </React.Fragment>
+                  )}
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            
+            <div className={classes.loadingContainer}>
+              <div style={{width: 56.56}}>
+                <CircularProgress color="primary"/>
+              </div>
+            </div>
+
+            <Button variant="fab" className={classes.fab} color="primary" onClick={this.toggleNewItemDialog} >
+              <Icons.Add />
+            </Button>
+            <Dialog
+              open={this.state.dialogOpen}
+              // onClose={this.handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+              >
+              <DialogTitle id="alert-dialog-title">{"Create New Item"}</DialogTitle>
+              <DialogContent>
+                <div style={{width: 223}}>
+                    <FormControl>
+                    <InputLabel htmlFor="newItemName">Item Name</InputLabel>
+                    <Input
+                      id="newItemName"
+                      type="text"
+                      required={true}
+                      value={this.state.newItemName}
+                      onChange={this.handleChange}
+                      style={{width: 223}}
+                      />
+                  </FormControl>
+                  <FormControl>
+                    <InputLabel htmlFor="newItemDesc">Item Description</InputLabel>
+                    <Input
+                      id="newItemDesc"
+                      type="text"
+                      value={this.state.newItemDesc}
+                      onChange={this.handleChange}
+                      multiline={true}
+                      style={{width: 223}}
+                      />
+                  </FormControl>
+                </div>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.toggleNewItemDialog} color="primary">
+                  Cancel
+                </Button>
+                <Button onClick={this.createItem} color="primary" autoFocus={true}>
+                  Create
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+          <Snackbar
+            anchorOrigin={{
+              horizontal: 'right',
+              vertical: 'bottom',
+            }}
+            open={this.state.snackbarOpen}
+            autoHideDuration={3000}
+            onClose={this.hideSnackbar}
+            ContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            message={<span id="message-id">{this.state.snackbarMessage}</span>}
+            TransitionComponent={Fade}
+            action={[
+              <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              className={classes.closeSnackbar}
+              onClick={this.hideSnackbar}
+              >
+                <Icons.Close />
+              </IconButton>,
+            ]}
+            />
+        </div>
+      );
+    }
   }
 
   private toggleNewItemDialog = () => {
