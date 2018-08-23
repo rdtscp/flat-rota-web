@@ -100,7 +100,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       paneContent = (
         <React.Fragment>
           <Typography variant="title" gutterBottom={true}>
-            <FlatForm />
+            <FlatForm closeFlatList={this.closeFlatList} />
           </Typography>
         </React.Fragment>
       );
@@ -209,7 +209,10 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       })
     }
   };
-  private toggleFlatList = (event: React.MouseEvent<HTMLElement>) => {
+  private closeFlatList = () => {
+    this.setState({ flatListOpen: false });
+  }
+  private toggleFlatList = () => {
     const populatedFlats: Array<Promise<Models.Flat | null>> = this.props.currentUser.flats.map((flat: Models.Flat) => 
     Models.FlatAPI.get(flat.id)
       .then((data: Models.FlatResponseData) => data.content)
