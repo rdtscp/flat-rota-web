@@ -134,6 +134,7 @@ class DeviceList extends React.Component<DeviceListProps, DeviceListState> {
       }
       else if (this.props.authState.authToken === deviceAuthToken) {
         this.props.setAuthStateAction('');
+        window.location.reload();
       }
       else {
         this.setState({ confirmationSnackbarOpen: true });
