@@ -35,9 +35,10 @@ class Flat extends React.Component<FlatProps, FlatState> {
     const { classes } = this.props;
 
     const thisFlat: Models.Flat = this.props.flat;
-    // const sortedFlats = thisFlat.items.sort((a, b) => {
-    //   return (+(a > b.value) || +(a.value === b.value) - 1) || (+(a.secondaryValue > b.secondaryValue) || +(a.secondaryValue === b.secondaryValue) - 1);
-    // });
+    const hasNotificationItems = thisFlat.items.filter(item => item.notification === true);
+    const nonNotificationItems = thisFlat.items.filter(item => item.notification === false);
+    hasNotificationItems.sort((a, b) => b.lastBumped - a.lastBumped);
+    nonNotificationItems.sort((a, b) => b.lastBumped - a.lastBumped);
     return (
       <div className={classes.flatContainer}>
         <div style={{ width: 327 }}>
@@ -53,7 +54,12 @@ class Flat extends React.Component<FlatProps, FlatState> {
                 )}
             </ExpansionPanelDetails>
           </ExpansionPanel>
-          {thisFlat.items.map((item: Models.Item, index: number) => (
+          {hasNotificationItems.map((item: Models.Item, index: number) => (
+            <React.Fragment key={index}>
+              <Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
+            </React.Fragment>
+          ))}
+          {nonNotificationItems.reverse().map((item: Models.Item, index: number) => (
             <React.Fragment key={index}>
               <Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
             </React.Fragment>

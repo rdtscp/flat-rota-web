@@ -1,7 +1,7 @@
 /* Components/SettingsMenu/DeviceList/Types.ts */  //
 
 /* React/Redux/Other */
-// import { Dispatch }                                   from 'redux';
+import { Dispatch }                                   from 'redux';
 
 /* This Project */
 import * as Models                                    from 'src/Models';
@@ -10,15 +10,14 @@ import * as Models                                    from 'src/Models';
 import { ITodoListStyle }                             from './Styles';
 
 interface ITodoListProps {
-  devices:              Models.Device[];
+  currentUser:          Models.User;
+  flats:                Models.Flat[];
+  setCurrentUserFlats:  (flats: Models.Flat[]) => ((dispatch: Dispatch) => void);
 }
 
 interface ITodoListState {
-  confirmationAlertOpen:    boolean;
-  confirmationSnackbarOpen: boolean;
-  deviceToLogoutAuthToken:  string;
-  deviceToLogoutID:         string;
-  deviceToLogoutString:     string;
+  snackbarMessage:  string;
+  snackbarOpen:     boolean;
 }
 
 type TodoListProps = ITodoListProps & ITodoListStyle;

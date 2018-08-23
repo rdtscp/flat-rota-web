@@ -10,6 +10,7 @@ import withStyles                                     from '@material-ui/core/st
 import * as Models                                    from 'src/Models';
 import { setAuthStateAction }                         from 'src/Redux/Actions/authActions';
 import { setCurrentUserAction }                       from 'src/Redux/Actions/userActions';
+import { setCurrentUserFlats }                        from 'src/Redux/Actions/userActions';
 
 /* This Component */
 import { todoListClasses }                            from './Styles';
@@ -17,8 +18,9 @@ import TodoList                                       from './TodoList';
 
 const mapStateToProps = (state: Models.StateType) => {
   return {
-    devices:    state.currentUser.devices,
+    currentUser:    state.currentUser,
+    flats:          state.currentUser.flats,
   }
 }
 
-export default connect(mapStateToProps, { setAuthStateAction, setCurrentUserAction })(withStyles(todoListClasses)(TodoList));
+export default connect(mapStateToProps, { setAuthStateAction, setCurrentUserAction, setCurrentUserFlats })(withStyles(todoListClasses)(TodoList));
