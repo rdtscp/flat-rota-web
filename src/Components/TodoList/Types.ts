@@ -10,13 +10,15 @@ import * as Models                                    from 'src/Models';
 import { ITodoListStyle }                             from './Styles';
 
 interface ITodoListProps {
-  currentUser:          Models.User;
-  flats:                Models.Flat[];
+  devices:              Models.Device[];
 }
 
 interface ITodoListState {
-  snackbarMessage:  string;
-  snackbarOpen:     boolean;
+  confirmationAlertOpen:    boolean;
+  confirmationSnackbarOpen: boolean;
+  deviceToLogoutAuthToken:  string;
+  deviceToLogoutID:         string;
+  deviceToLogoutString:     string;
 }
 
 type TodoListProps = ITodoListProps & ITodoListStyle;

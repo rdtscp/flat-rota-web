@@ -17,8 +17,7 @@ import TodoList                                       from './TodoList';
 
 const mapStateToProps = (state: Models.StateType) => {
   return {
-    currentUser:    state.currentUser,
-    flats:          state.currentUser.flats,
+    devices:    state.currentUser.devices,
   }
 }
 
