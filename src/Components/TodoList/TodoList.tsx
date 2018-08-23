@@ -60,7 +60,7 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
       if (items.length === 0) {
         return (
           <Typography variant="headline" gutterBottom={true}>
-            You have nothing to do!
+            Nothing to do
           </Typography>
         );
       }

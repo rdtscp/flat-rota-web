@@ -91,9 +91,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       paneTitle   = "Your Todos";
       paneContent = (
         <React.Fragment>
-          <Typography variant="title" gutterBottom={true}>
-            <TodoList />
-          </Typography>
+          <TodoList />
         </React.Fragment>
       );
     }
