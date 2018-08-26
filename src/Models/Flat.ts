@@ -82,14 +82,71 @@ const FlatAPI = {
     });
   },
 
-  update() {
-    // const authToken: string = store.getState().authState.authToken;
-    return '@TODO';
+  update(flatID: string, newMemberUsername: string) {
+    const authToken: string = store.getState().authState.authToken;
+    return new Promise((resolve, reject) => {
+      network.getCSRF((csrf: string) => {
+        axios.post(process.env.REACT_APP_API_URL + '/flat/update', {
+          _csrf: csrf,
+          authToken,
+          flatID,
+          newMemberUsername,
+        },{
+          withCredentials: true,
+        })
+        .then((response: AxiosResponse) => {
+          const data: FlatResponseData = response.data;
+          return resolve(data);
+        })
+        .catch((error) => {
+          return reject(error);
+        });
+      });
+    });
   },
 
-  destroy() {
-    // const authToken: string = store.getState().authState.authToken;
-    return '@TODO';
+  destroy(flatID: string) {
+    const authToken: string = store.getState().authState.authToken;
+    return new Promise((resolve, reject) => {
+      network.getCSRF((csrf: string) => {
+        axios.post(process.env.REACT_APP_API_URL + '/flat/destroy', {
+          _csrf: csrf,
+          authToken,
+          flatID,
+        },{
+          withCredentials: true,
+        })
+        .then((response: AxiosResponse) => {
+          const data: FlatResponseData = response.data;
+          return resolve(data);
+        })
+        .catch((error) => {
+          return reject(error);
+        });
+      });
+    });
+  },
+
+  leave(flatID: string) {
+    const authToken: string = store.getState().authState.authToken;
+    return new Promise((resolve, reject) => {
+      network.getCSRF((csrf: string) => {
+        axios.post(process.env.REACT_APP_API_URL + '/flat/leave', {
+          _csrf: csrf,
+          authToken,
+          flatID,
+        },{
+          withCredentials: true,
+        })
+        .then((response: AxiosResponse) => {
+          const data: FlatResponseData = response.data;
+          return resolve(data);
+        })
+        .catch((error) => {
+          return reject(error);
+        });
+      });
+    });
   },
 
 }
