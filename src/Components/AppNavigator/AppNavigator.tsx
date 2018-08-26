@@ -141,8 +141,8 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
                     <Icons.Warning />
                   </IconButton>
                   <Menu id="menu-appbar" anchorEl={this.state.anchorEl} anchorOrigin={{ horizontal: 'right', vertical: 'top', }} transformOrigin={{ horizontal: 'right', vertical: 'top', }} open={flatOptsOpen} onClose={this.clickFlatOption} >
-                    <MenuItem id="leaveFlat" onClick={this.clickFlatOption}>Leave Flat</MenuItem>
-                    <MenuItem id="deleteFlat"  onClick={this.clickFlatOption}>Delete Flat</MenuItem>
+                    <MenuItem id="leave" onClick={this.clickFlatOption}>Leave Flat</MenuItem>
+                    <MenuItem id="destroy"  onClick={this.clickFlatOption}>Delete Flat</MenuItem>
                   </Menu>
                 </div>
               </React.Fragment>
@@ -237,7 +237,43 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
   }
   private clickFlatOption = (event: React.MouseEvent<HTMLElement>) => {
     if (event.currentTarget.id !== '') {
-      alert('Clicked Flat Option: ' + event.currentTarget.id + ' for flat: ' + this.state.activePane);
+      if (event.currentTarget.id === 'leave') {
+        Models.FlatAPI.leave(this.state.activePane)
+        .then((leaveData: Models.FlatResponseData) => {
+          this.props.setCurrentUserAction();
+          this.setState({
+            activePane: 'yourTodos',
+            flatListOpen: false,
+          });
+        })
+        .catch((leaveData: Models.UserResponseData) => {
+          this.props.setCurrentUserAction();
+          this.setState({
+            activePane: 'yourTodos',
+            flatListOpen: false,
+          });
+        });
+      }
+      else if (event.currentTarget.id === 'destroy') {
+        Models.FlatAPI.destroy(this.state.activePane)
+        .then((deleteData: Models.FlatResponseData) => {
+          this.props.setCurrentUserAction();
+          this.setState({
+            activePane: 'yourTodos',
+            flatListOpen: false,
+          });
+        })
+        .catch((deleteData: Models.UserResponseData) => {
+          this.props.setCurrentUserAction();
+          this.setState({
+            activePane: 'yourTodos',
+            flatListOpen: false,
+          });
+        });
+      }
+      else {
+        alert('Clicked Flat Option: ' + event.currentTarget.id + ' for flat: ' + this.state.activePane);
+      }
     }      
     this.setState({ anchorEl: null });
   }
