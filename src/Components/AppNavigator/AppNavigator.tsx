@@ -91,9 +91,9 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       paneTitle   = "Create New Flat";
       paneContent = (
         <React.Fragment>
-          <Typography variant="title" gutterBottom={true}>
+          <UI.Typography variant="title" gutterBottom={true}>
             <Components.FlatForm closeFlatList={this.closeFlatList} />
-          </Typography>
+          </UI.Typography>
         </React.Fragment>
       );
     }
@@ -105,57 +105,57 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
 
     return (
       <div className={classes.root}>
-        <Slide direction="up" in={settingsOpen} mountOnEnter={true} unmountOnExit={true}>
+        <UI.Slide direction="up" in={settingsOpen} mountOnEnter={true} unmountOnExit={true}>
           <div className={classes.settingsPopup}>
             <Components.SettingsMenu closeSettings={this.toggleSettings} />
           </div>
-        </Slide>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <IconButton color="inherit" aria-label="Open drawer" onClick={this.toggleDrawer} className={classes.navIconHide}>
-              <UIIcons.Menu />
-            </IconButton>
-            <Typography variant="title" color="inherit" noWrap={true} style={{flexGrow: 1}}>
+        </UI.Slide>
+        <UI.AppBar className={classes.appBar}>
+          <UI.Toolbar>
+            <UI.IconButton color="inherit" aria-label="Open drawer" onClick={this.toggleDrawer} className={classes.navIconHide}>
+              <Icons.Menu />
+            </UI.IconButton>
+            <UI.Typography variant="title" color="inherit" noWrap={true} style={{flexGrow: 1}}>
               {paneTitle}
-            </Typography>
+            </UI.Typography>
             {(activePane !== 'yourTodos' && activePane !== 'createFlat') ? (
               <React.Fragment>
-                <IconButton color="inherit" onClick={this.addMembersFlat}>
-                  <UIIcons.GroupAdd /> 
-                </IconButton>
+                <UI.IconButton color="inherit" onClick={this.addMembersFlat}>
+                  <Icons.GroupAdd /> 
+                </UI.IconButton>
                 <div>
-                  <IconButton
+                  <UI.IconButton
                     aria-owns={flatOptsOpen ? 'menu-appbar' : ''}
                     aria-haspopup="true"
                     onClick={this.openFlatOptions}
                     color="inherit"
                     >
-                    <UIIcons.Warning />
-                  </IconButton>
-                  <Menu id="menu-appbar" anchorEl={this.state.anchorEl} anchorOrigin={{ horizontal: 'right', vertical: 'top', }} transformOrigin={{ horizontal: 'right', vertical: 'top', }} open={flatOptsOpen} onClose={this.clickFlatOption} >
-                    <MenuItem id="leave" onClick={this.clickFlatOption}>Leave Flat</MenuItem>
-                    <MenuItem id="destroy"  onClick={this.clickFlatOption}>Delete Flat</MenuItem>
-                  </Menu>
+                    <Icons.Warning />
+                  </UI.IconButton>
+                  <UI.Menu id="menu-appbar" anchorEl={this.state.anchorEl} anchorOrigin={{ horizontal: 'right', vertical: 'top', }} transformOrigin={{ horizontal: 'right', vertical: 'top', }} open={flatOptsOpen} onClose={this.clickFlatOption} >
+                    <UI.MenuItem id="leave" onClick={this.clickFlatOption}>Leave Flat</UI.MenuItem>
+                    <UI.MenuItem id="destroy"  onClick={this.clickFlatOption}>Delete Flat</UI.MenuItem>
+                  </UI.Menu>
                 </div>
               </React.Fragment>
             ) : null}
-          </Toolbar>
-        </AppBar>
-        <Hidden mdUp={true}>
-          <Drawer variant="temporary" anchor={'left'} open={drawerOpen} onClose={this.toggleDrawer} classes={{paper: classes.drawerPaper}} ModalProps={{keepMounted: true}} >
+          </UI.Toolbar>
+        </UI.AppBar>
+        <UI.Hidden mdUp={true}>
+          <UI.Drawer variant="temporary" anchor={'left'} open={drawerOpen} onClose={this.toggleDrawer} classes={{paper: classes.drawerPaper}} ModalProps={{keepMounted: true}} >
             {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden smDown={true} implementation="css">
-          <Drawer variant="permanent" open={true} classes={{paper: classes.drawerPaper}} >
+          </UI.Drawer>
+        </UI.Hidden>
+        <UI.Hidden smDown={true} implementation="css">
+          <UI.Drawer variant="permanent" open={true} classes={{paper: classes.drawerPaper}} >
             {drawer}
-          </Drawer>
-        </Hidden>
+          </UI.Drawer>
+        </UI.Hidden>
         <main className={classes.paneContainer}>
           <div className={classes.toolbar} />
           {paneContent}
         </main>
-        <Snackbar
+        <UI.Snackbar
           anchorOrigin={{
             horizontal: 'right',
             vertical: 'bottom',
@@ -167,17 +167,17 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
             'aria-describedby': 'message-id',
           }}
           message={<span id="message-id">{this.state.snackbarMessage}</span>}
-          TransitionComponent={Fade}
+          TransitionComponent={UI.Fade}
           action={[
-            <IconButton
+            <UI.IconButton
             key="close"
             aria-label="Close"
             color="inherit"
             className={classes.closeSnackbar}
             onClick={this.hideSnackbar}
             >
-              <UIIcons.Close />
-            </IconButton>,
+              <Icons.Close />
+            </UI.IconButton>,
           ]}
         />
       </div>
