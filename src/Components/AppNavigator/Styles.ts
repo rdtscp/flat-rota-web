@@ -15,6 +15,10 @@ const appNavigatorClasses = (theme: Theme) => createStyles({
     },
     position: 'absolute',
   },
+  closeSnackbar: {
+    height: theme.spacing.unit * 4,
+    width: theme.spacing.unit * 4,
+  },
   drawerPaper: {
     [theme.breakpoints.up('md')]: {
       position: 'relative',

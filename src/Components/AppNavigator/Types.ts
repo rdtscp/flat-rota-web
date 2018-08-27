@@ -22,6 +22,8 @@ interface IAppNavigatorState {
   drawerWasOpen:  boolean;
   flatListOpen:   boolean;
   settingsOpen:   boolean;
+  snackbarMessage:string;
+  snackbarOpen:   boolean;
 }
 
 type AppNavigatorProps = IAppNavigatorProps & IAppNavigatorStyle;

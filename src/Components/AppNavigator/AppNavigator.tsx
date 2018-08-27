@@ -1,24 +1,14 @@
 /* Components/AppNavigator/AppNavigator.tsx */
 
 /* React/Redux/Other */
-// import classNames                                     from 'classnames';
 import * as React                                     from 'react';
 
 /* Material-UI */
-import {
-  AppBar, Collapse, Divider, Drawer, Hidden,
-  IconButton, List, ListItem, ListItemIcon,
-  ListItemText, ListSubheader, Menu, MenuItem,
-  Slide, Toolbar, Typography
-}                                                     from '@material-ui/core';
+import * as UI                                        from '@material-ui/core';
 import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
-import DrawerHeader                                   from 'src/Components/DrawerHeader';
-import Flat                                           from 'src/Components/Flat';
-import FlatForm                                       from 'src/Components/FlatForm';
-import SettingsMenu                                   from 'src/Components/SettingsMenu';
-import TodoList                                       from 'src/Components/TodoList';
+import * as Components                                from 'src/Components';
 import * as Models                                    from "src/Models";
 
 /* This Component */
@@ -36,6 +26,8 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       drawerWasOpen:      true,
       flatListOpen:       false,
       settingsOpen:       false,
+      snackbarMessage:    '',
+      snackbarOpen:       false,
     };
   }
 
@@ -47,41 +39,41 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
 
     const drawer = (
       <React.Fragment>
-        <DrawerHeader drawerOpen={drawerOpen} toggleSettings={this.toggleSettings} />
-        <List subheader={<ListSubheader component="div">Your Account</ListSubheader>}>
-          <ListItem id="createFlat" onClick={this.clickDrawer} button={true}>
-            <ListItemIcon>
+        <Components.DrawerHeader drawerOpen={drawerOpen} toggleSettings={this.toggleSettings} />
+        <UI.List subheader={<UI.ListSubheader component="div">Your Account</UI.ListSubheader>}>
+          <UI.ListItem id="createFlat" onClick={this.clickDrawer} button={true}>
+            <UI.ListItemIcon>
               <Icons.AddCircle />
-            </ListItemIcon>
-            <ListItemText primary="Create New Flat" />
-          </ListItem>
-          <ListItem id="yourTodos"  onClick={this.clickDrawer} button={true}>
-            <ListItemIcon>
+            </UI.ListItemIcon>
+            <UI.ListItemText primary="Create New Flat" />
+          </UI.ListItem>
+          <UI.ListItem id="yourTodos"  onClick={this.clickDrawer} button={true}>
+            <UI.ListItemIcon>
               <Icons.List />
-            </ListItemIcon>
-            <ListItemText primary="Your Todos" />
-          </ListItem>
-          <Divider />
-          <ListItem button={true} onClick={this.toggleFlatList}>
-            <ListItemIcon>
+            </UI.ListItemIcon>
+            <UI.ListItemText primary="Your Todos" />
+          </UI.ListItem>
+          <UI.Divider />
+          <UI.ListItem button={true} onClick={this.toggleFlatList}>
+            <UI.ListItemIcon>
               <Icons.Home />
-            </ListItemIcon>
-            <ListItemText inset={true} primary="Flats" />
+            </UI.ListItemIcon>
+            <UI.ListItemText inset={true} primary="Flats" />
             {flatListOpen ? <Icons.ExpandLess /> : <Icons.ExpandMore />}
-          </ListItem>
-          <Collapse in={flatListOpen} timeout="auto" unmountOnExit={true}>
-            <List component="div" disablePadding={true}>
+          </UI.ListItem>
+          <UI.Collapse in={flatListOpen} timeout="auto" unmountOnExit={true}>
+            <UI.List component="div" disablePadding={true}>
               {currentUser.flats.map((flat: Models.Flat, index: number) => (
-                <ListItem id={flat.id} onClick={this.clickDrawer} key={index} className={classes.nested} button={true}>
-                  <ListItemIcon>
+                <UI.ListItem id={flat.id} onClick={this.clickDrawer} key={index} className={classes.nested} button={true}>
+                  <UI.ListItemIcon>
                     <Icons.LocationOn />
-                  </ListItemIcon>
-                  <ListItemText primary={flat.name} />
-                </ListItem>
+                  </UI.ListItemIcon>
+                  <UI.ListItemText primary={flat.name} />
+                </UI.ListItem>
               ))}
-            </List>
-          </Collapse>
-        </List>
+            </UI.List>
+          </UI.Collapse>
+        </UI.List>
       </React.Fragment>
     );
 
@@ -91,7 +83,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       paneTitle   = "Your Todos";
       paneContent = (
         <React.Fragment>
-          <TodoList />
+          <Components.TodoList />
         </React.Fragment>
       );
     }
@@ -100,7 +92,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       paneContent = (
         <React.Fragment>
           <Typography variant="title" gutterBottom={true}>
-            <FlatForm closeFlatList={this.closeFlatList} />
+            <Components.FlatForm closeFlatList={this.closeFlatList} />
           </Typography>
         </React.Fragment>
       );
@@ -108,20 +100,20 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     else {
       const currentFlat = this.getFlatByID(activePane);
       paneTitle   = currentFlat.name;
-      paneContent = (<Flat flat={currentFlat} />);
+      paneContent = (<Components.Flat flat={currentFlat} />);
     }
 
     return (
       <div className={classes.root}>
         <Slide direction="up" in={settingsOpen} mountOnEnter={true} unmountOnExit={true}>
           <div className={classes.settingsPopup}>
-            <SettingsMenu closeSettings={this.toggleSettings} />
+            <Components.SettingsMenu closeSettings={this.toggleSettings} />
           </div>
         </Slide>
         <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton color="inherit" aria-label="Open drawer" onClick={this.toggleDrawer} className={classes.navIconHide}>
-              <Icons.Menu />
+              <UIIcons.Menu />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap={true} style={{flexGrow: 1}}>
               {paneTitle}
@@ -129,7 +121,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
             {(activePane !== 'yourTodos' && activePane !== 'createFlat') ? (
               <React.Fragment>
                 <IconButton color="inherit" onClick={this.addMembersFlat}>
-                  <Icons.GroupAdd /> 
+                  <UIIcons.GroupAdd /> 
                 </IconButton>
                 <div>
                   <IconButton
@@ -138,7 +130,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
                     onClick={this.openFlatOptions}
                     color="inherit"
                     >
-                    <Icons.Warning />
+                    <UIIcons.Warning />
                   </IconButton>
                   <Menu id="menu-appbar" anchorEl={this.state.anchorEl} anchorOrigin={{ horizontal: 'right', vertical: 'top', }} transformOrigin={{ horizontal: 'right', vertical: 'top', }} open={flatOptsOpen} onClose={this.clickFlatOption} >
                     <MenuItem id="leave" onClick={this.clickFlatOption}>Leave Flat</MenuItem>
@@ -163,6 +155,31 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
           <div className={classes.toolbar} />
           {paneContent}
         </main>
+        <Snackbar
+          anchorOrigin={{
+            horizontal: 'right',
+            vertical: 'bottom',
+          }}
+          open={this.state.snackbarOpen}
+          autoHideDuration={3000}
+          onClose={this.hideSnackbar}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{this.state.snackbarMessage}</span>}
+          TransitionComponent={Fade}
+          action={[
+            <IconButton
+            key="close"
+            aria-label="Close"
+            color="inherit"
+            className={classes.closeSnackbar}
+            onClick={this.hideSnackbar}
+            >
+              <UIIcons.Close />
+            </IconButton>,
+          ]}
+        />
       </div>
     );
 
@@ -240,6 +257,9 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       if (event.currentTarget.id === 'leave') {
         Models.FlatAPI.leave(this.state.activePane)
         .then((leaveData: Models.FlatResponseData) => {
+          if (leaveData.message !== null) {
+            this.showSnackbar(leaveData.message);
+          }
           this.props.setCurrentUserAction();
           this.setState({
             activePane: 'yourTodos',
@@ -247,6 +267,9 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
           });
         })
         .catch((leaveData: Models.UserResponseData) => {
+          if (leaveData.message !== null) {
+            this.showSnackbar(leaveData.message);
+          }
           this.props.setCurrentUserAction();
           this.setState({
             activePane: 'yourTodos',
@@ -257,6 +280,9 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       else if (event.currentTarget.id === 'destroy') {
         Models.FlatAPI.destroy(this.state.activePane)
         .then((deleteData: Models.FlatResponseData) => {
+          if (deleteData.message !== null) {
+            this.showSnackbar(deleteData.message);
+          }
           this.props.setCurrentUserAction();
           this.setState({
             activePane: 'yourTodos',
@@ -264,6 +290,9 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
           });
         })
         .catch((deleteData: Models.UserResponseData) => {
+          if (deleteData.message !== null) {
+            this.showSnackbar(deleteData.message);
+          }
           this.props.setCurrentUserAction();
           this.setState({
             activePane: 'yourTodos',
@@ -277,6 +306,19 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     }      
     this.setState({ anchorEl: null });
   }
+
+  private showSnackbar = (message: string) => {
+    this.setState({
+      snackbarMessage: message,
+      snackbarOpen: true,
+    });
+  };
+
+  private hideSnackbar = () => {
+    this.setState({
+      snackbarOpen: false
+    });
+  };
   
 }
 
