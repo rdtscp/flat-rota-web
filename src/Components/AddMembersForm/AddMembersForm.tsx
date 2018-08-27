@@ -8,7 +8,7 @@ import * as UI                                        from '@material-ui/core';
 import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
-// import * as Models                                    from 'src/Models';
+import * as Models                                    from 'src/Models';
 
 /* This Component */
 import { AddMembersFormProps, AddMembersFormState }   from './Types';
@@ -20,11 +20,7 @@ class AddMembersForm extends React.Component<AddMembersFormProps, AddMembersForm
     this.state = {
       formOpen:           true,
       newFlatMembers:     [],
-      newFlatName:        '',
-      newFlatNameInvalid: false,
       newFlatNewMember:   '',
-      snackbarMessage:    '',
-      snackbarOpen:       false,
     };
   }
   
@@ -108,15 +104,19 @@ class AddMembersForm extends React.Component<AddMembersFormProps, AddMembersForm
   }
 
   private addMembers = () => {
-    alert('Add Members: ' + this.state.newFlatMembers)
-    this.props.submit();
+    Models.FlatAPI.update(this.props.flatID, this.state.newFlatMembers)
+    .then((data: Models.FlatResponseData) => {
+      this.props.submit();
+    })
+    .catch(error => {
+      alert(error);
+    });
   }
 
   private handleChange= (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       ...this.state,
       [event.target.id]: event.target.value,
-      newFlatNameInvalid: (event.target.id !== 'newFlatName' && this.state.newFlatName === '') ? true : false,
     });
   }
 

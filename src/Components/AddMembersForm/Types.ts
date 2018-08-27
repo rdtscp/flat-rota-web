@@ -10,6 +10,7 @@ import { IAddMembersFormStyle }                       from './Styles';
 interface IAddMembersFormProps {
   currentUser:          Models.User;
   cancel:               () => void;
+  flatID:               string;
   setCurrentUserAction: () => ((dispatch: Dispatch) => void);
   submit :              () => void;
 }
@@ -17,11 +18,7 @@ interface IAddMembersFormProps {
 interface IAddMembersFormState {
   formOpen:            boolean;
   newFlatMembers:      string[];
-  newFlatName:         string;
-  newFlatNameInvalid:  boolean
   newFlatNewMember:    string;
-  snackbarMessage:     string;
-  snackbarOpen:        boolean;
 }
 
 type AddMembersFormProps = IAddMembersFormProps & IAddMembersFormStyle;

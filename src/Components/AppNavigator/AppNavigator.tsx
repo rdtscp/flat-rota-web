@@ -109,7 +109,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
 
     let addMembersForm = <React.Fragment>{/* */}</React.Fragment>
     if (this.state.addMembersOpen) {
-      addMembersForm = (<Components.AddMembersForm submit={this.reloadApp} cancel={this.toggleAddMembersForm} />);
+      addMembersForm = (<Components.AddMembersForm flatID={this.state.activePane} submit={this.reloadApp} cancel={this.toggleAddMembersForm} />);
     }
 
     return (
