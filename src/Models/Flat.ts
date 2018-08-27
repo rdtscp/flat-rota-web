@@ -82,7 +82,7 @@ const FlatAPI = {
     });
   },
 
-  update(flatID: string, newMemberUsername: string) {
+  update(flatID: string, newMembersUsernames: string[]) {
     const authToken: string = store.getState().authState.authToken;
     return new Promise((resolve, reject) => {
       network.getCSRF((csrf: string) => {
@@ -90,7 +90,7 @@ const FlatAPI = {
           _csrf: csrf,
           authToken,
           flatID,
-          newMemberUsername,
+          newMembersUsernames,
         },{
           withCredentials: true,
         })
