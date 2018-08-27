@@ -1,3 +1,4 @@
+import AddMembersForm         from './AddMembersForm';
 import AppNavigator           from './AppNavigator';
 import ConfirmDelete          from './ConfirmDelete';
 import Device                 from './Device';
@@ -12,6 +13,7 @@ import TodoList               from './TodoList';
 
 
 export {
+  AddMembersForm,
   AppNavigator,
   ConfirmDelete,
   Device,
