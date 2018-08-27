@@ -4,9 +4,7 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import { Button, Fade, FormControl, IconButton,
-Input, InputAdornment, InputLabel, Snackbar
-}                                                     from '@material-ui/core';
+import * as UI                                        from '@material-ui/core';
 import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
@@ -35,9 +33,9 @@ class LoginForm extends React.Component<LoginFormProps, LoginFormState> {
       <div className={classes.loginContainer}>
         <div className={classes.formContainer}>
           <form style={{width: 223}}>
-            <FormControl>
-              <InputLabel htmlFor="login-username">Username</InputLabel>
-              <Input
+            <UI.FormControl>
+              <UI.InputLabel htmlFor="login-username">Username</UI.InputLabel>
+              <UI.Input
                 name="username"
                 id="login-username"
                 value={this.state.username}
@@ -46,10 +44,10 @@ class LoginForm extends React.Component<LoginFormProps, LoginFormState> {
                 onKeyDown={this.handleKeyDown}
                 style={{width: 223}}
               />
-            </FormControl>
-            <FormControl style={{marginTop: 5}}>
-              <InputLabel htmlFor="login-password">Password</InputLabel>
-              <Input
+            </UI.FormControl>
+            <UI.FormControl style={{marginTop: 5}}>
+              <UI.InputLabel htmlFor="login-password">Password</UI.InputLabel>
+              <UI.Input
                 name="password"
                 id="login-password"
                 value={this.state.password}
@@ -59,30 +57,30 @@ class LoginForm extends React.Component<LoginFormProps, LoginFormState> {
 
                 type={this.state.showPassword ? 'text' : 'password'}
                 endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
+                  <UI.InputAdornment position="end">
+                    <UI.IconButton
                       aria-label="Toggle password visibility"
                       onClick={this.handleClickShowPassword}
                       onMouseDown={this.handleMouseDownPassword}
                     >
                       {this.state.showPassword ? <Icons.VisibilityOff /> : <Icons.Visibility />}
-                    </IconButton>
-                  </InputAdornment>
+                    </UI.IconButton>
+                  </UI.InputAdornment>
                 }
               />
-            </FormControl>
+            </UI.FormControl>
             <div className={classes.buttonsContainer}>
-              <Button onClick={this.login} variant="contained" color="primary" className={classes.buttonsStyle}>
+              <UI.Button onClick={this.login} variant="contained" color="primary" className={classes.buttonsStyle}>
                 Login
-              </Button>
-              <Button onClick={this.register} variant="contained" color="primary"  className={classes.buttonsStyle}>
+              </UI.Button>
+              <UI.Button onClick={this.register} variant="contained" color="primary"  className={classes.buttonsStyle}>
                 Register
-              </Button>
+              </UI.Button>
             </div>
             
           </form>
         </div>
-        <Snackbar
+        <UI.Snackbar
           anchorOrigin={{
             horizontal: 'left',
             vertical: 'bottom',
@@ -94,9 +92,9 @@ class LoginForm extends React.Component<LoginFormProps, LoginFormState> {
             'aria-describedby': 'message-id',
           }}
           message={<span id="message-id">{this.state.snackbarMessage}</span>}
-          TransitionComponent={Fade}
+          TransitionComponent={UI.Fade}
           action={[
-            <IconButton
+            <UI.IconButton
               key="close"
               aria-label="Close"
               color="inherit"
@@ -104,7 +102,7 @@ class LoginForm extends React.Component<LoginFormProps, LoginFormState> {
               onClick={this.hideSnackbar}
             >
               <Icons.Close />
-            </IconButton>,
+            </UI.IconButton>,
           ]}
         />
       </div>

@@ -4,14 +4,11 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import {
-  CircularProgress, Fade, IconButton, Snackbar,
-  Typography
-}                                                     from '@material-ui/core';
+import * as UI                                        from '@material-ui/core';
 import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
-import Item                                           from 'src/Components/Item';
+import * as Components                                from 'src/Components';
 import * as Models                                    from 'src/Models';
 
 /* This Component */
@@ -42,7 +39,7 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
       return (
         <div className={classes.loadingContainer}>
           <div style={{width: 56.56}}>
-            <CircularProgress color="primary"/>
+            <UI.CircularProgress color="primary"/>
           </div>
         </div>
       );
@@ -59,9 +56,9 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
       });
       if (items.length === 0) {
         return (
-          <Typography variant="headline" gutterBottom={true}>
+          <UI.Typography variant="headline" gutterBottom={true}>
             Nothing to do
-          </Typography>
+          </UI.Typography>
         );
       }
       return (
@@ -72,13 +69,13 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
               if (relevantItems.length > 0) {
                 return (
                   <React.Fragment key={flatIndex}>
-                    <Typography variant="headline" gutterBottom={true}>
+                    <UI.Typography variant="headline" gutterBottom={true}>
                       {flat.name}
-                    </Typography>
+                    </UI.Typography>
                     <hr />
                     {relevantItems.map((item, itemIndex) => 
                       <React.Fragment key={itemIndex}>
-                        <Item item={item} flat={item.flat} showSnackbar={this.showSnackbar} />
+                        <Components.Item item={item} flat={item.flat} showSnackbar={this.showSnackbar} />
                       </React.Fragment>
                     )}
                     <br />
@@ -90,7 +87,7 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
               }
             })}
           </div>
-          <Snackbar
+          <UI.Snackbar
             anchorOrigin={{
               horizontal: 'right',
               vertical: 'bottom',
@@ -102,9 +99,9 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
               'aria-describedby': 'message-id',
             }}
             message={<span id="message-id">{this.state.snackbarMessage}</span>}
-            TransitionComponent={Fade}
+            TransitionComponent={UI.Fade}
             action={[
-              <IconButton
+              <UI.IconButton
               key="close"
               aria-label="Close"
               color="inherit"
@@ -112,7 +109,7 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
               onClick={this.hideSnackbar}
               >
                 <Icons.Close />
-              </IconButton>,
+              </UI.IconButton>,
             ]}
           />
       </div>

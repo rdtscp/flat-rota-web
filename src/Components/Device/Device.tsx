@@ -4,11 +4,7 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import {
-  Button,
-  Paper,
-  Typography
-}                                                     from '@material-ui/core';
+import * as UI                                        from '@material-ui/core';
 
 /* This Component */
 import { DeviceProps, DeviceState }                   from './Types';
@@ -31,15 +27,15 @@ class Device extends React.Component<DeviceProps, DeviceState> {
     }
 
     return (
-      <Paper className={classes.root} elevation={5}>
-        <Typography variant="title" >
+      <UI.Paper className={classes.root} elevation={5}>
+        <UI.Typography variant="title" >
           {this.props.userAgentStr}
-        </Typography>
-        <Typography className={lastActiveClass} variant="subheading">
-          <Button onClick={this.handleLogoutClick} variant="contained" color="primary" >Logout</Button>  &nbsp;&nbsp;        
+        </UI.Typography>
+        <UI.Typography className={lastActiveClass} variant="subheading">
+          <UI.Button onClick={this.handleLogoutClick} variant="contained" color="primary" >Logout</UI.Button>  &nbsp;&nbsp;        
           {this.state.lastActiveContent} 
-        </Typography>
-      </Paper>
+        </UI.Typography>
+      </UI.Paper>
     );
   }
 

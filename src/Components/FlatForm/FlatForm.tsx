@@ -2,11 +2,7 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import {
-  Button, Chip, Fade, FormControl, Icon,
-  IconButton, Input, InputAdornment, InputLabel,
-  Paper, Snackbar, Typography
-}                                                     from '@material-ui/core';
+import * as UI                                        from '@material-ui/core';
 import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
@@ -35,9 +31,9 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
     return (
       <div>
         <form className={classes.container} noValidate={true} autoComplete="off">
-          <FormControl className={classes.margin}>
-            <InputLabel htmlFor="newFlatName">Flat Name</InputLabel>
-            <Input
+          <UI.FormControl className={classes.margin}>
+            <UI.InputLabel htmlFor="newFlatName">Flat Name</UI.InputLabel>
+            <UI.Input
               id="newFlatName"
               type="text"
               required={true}
@@ -45,36 +41,36 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
               value={this.state.newFlatName}
               onChange={this.handleChange}
             />
-          </FormControl>
-          <FormControl className={classes.margin}>
-            <InputLabel htmlFor="newFlatNewMember">Add Member</InputLabel>
-            <Input
+          </UI.FormControl>
+          <UI.FormControl className={classes.margin}>
+            <UI.InputLabel htmlFor="newFlatNewMember">Add Member</UI.InputLabel>
+            <UI.Input
               id="newFlatNewMember"
               type="text"
               value={this.state.newFlatNewMember}
               onChange={this.handleChange}
               onKeyDown={this.handleAddMemberEnter}
               endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
+                <UI.InputAdornment position="end">
+                  <UI.IconButton
                     aria-label="Add member to group"
                     onClick={this.addMember}
                   >
                     <Icons.AddCircle />
-                  </IconButton>
-                </InputAdornment>
+                  </UI.IconButton>
+                </UI.InputAdornment>
               }
             />
-          </FormControl>
-          <Paper className={classes.paperRoot} elevation={1}>
-            <Typography variant="subheading">
+          </UI.FormControl>
+          <UI.Paper className={classes.paperRoot} elevation={1}>
+            <UI.Typography variant="subheading">
               Members
-            </Typography>
+            </UI.Typography>
             <div style={{ display: 'block' }}>
               {this.state.newFlatMembers.map((username: string, index: number) => { 
                 if (username === this.props.currentUser.username) {
                   return (
-                    <Chip
+                    <UI.Chip
                       key={index}
                       label={username}
                       id={username}
@@ -84,7 +80,7 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
                   );
                 } else {
                   return (
-                    <Chip
+                    <UI.Chip
                       key={index}
                       label={username}
                       id={username}
@@ -97,13 +93,13 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
                 
               })}
             </div>
-          </Paper>
-          <Button variant="contained" color="primary" className={classes.button} onClick={this.createFlatGroup}>
+          </UI.Paper>
+          <UI.Button variant="contained" color="primary" className={classes.button} onClick={this.createFlatGroup}>
             Create Flat Group
-            <Icon className={classes.rightIcon}>send</Icon>
-          </Button>
+            <UI.Icon className={classes.rightIcon}>send</UI.Icon>
+          </UI.Button>
         </form>
-        <Snackbar
+        <UI.Snackbar
           anchorOrigin={{
             horizontal: 'right',
             vertical: 'bottom',
@@ -115,9 +111,9 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
             'aria-describedby': 'message-id',
           }}
           message={<span id="message-id">{this.state.snackbarMessage}</span>}
-          TransitionComponent={Fade}
+          TransitionComponent={UI.Fade}
           action={[
-            <IconButton
+            <UI.IconButton
               key="close"
               aria-label="Close"
               color="inherit"
@@ -125,7 +121,7 @@ export default class FlatForm extends React.Component<FlatFormProps, FlatFormSta
               onClick={this.hideSnackbar}
             >
               <Icons.Close />
-            </IconButton>,
+            </UI.IconButton>,
           ]}
         />
       </div>

@@ -4,15 +4,11 @@
 import * as React from 'react';
 
 /* Material-UI */
-import { Button, Chip, CircularProgress, Dialog, DialogActions, 
-  DialogContent, DialogTitle,
-  ExpansionPanel, ExpansionPanelDetails,  ExpansionPanelSummary, Fade,
-  FormControl, IconButton, Input, InputLabel, Snackbar, Typography
-}                                                     from '@material-ui/core';
+import * as UI                                        from '@material-ui/core';
 import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
-import Item                                           from 'src/Components/Item';
+import * as Components                                from 'src/Components';
 import * as Models                                    from "src/Models";
 
 /* This Component */
@@ -43,43 +39,43 @@ class Flat extends React.Component<FlatProps, FlatState> {
       return (
         <div className={classes.flatContainer}>
           <div style={{ width: 327 }}>
-            <ExpansionPanel>
-              <ExpansionPanelSummary expandIcon={<Icons.ExpandMore />}>
-                <Typography variant="headline"> Flat Members </Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+            <UI.ExpansionPanel>
+              <UI.ExpansionPanelSummary expandIcon={<Icons.ExpandMore />}>
+                <UI.Typography variant="headline"> Flat Members </UI.Typography>
+              </UI.ExpansionPanelSummary>
+              <UI.ExpansionPanelDetails>
                   {thisFlat.members.map((member, index) =>
                     <React.Fragment key={index}>
-                      <Chip label={member.username} className={classes.chip} color="primary" />
+                      <UI.Chip label={member.username} className={classes.chip} color="primary" />
                     </React.Fragment>
                   )}
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+              </UI.ExpansionPanelDetails>
+            </UI.ExpansionPanel>
             {hasNotificationItems.map((item: Models.Item, index: number) => (
               <React.Fragment key={index}>
-                <Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
+                <Components.Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
               </React.Fragment>
             ))}
             {nonNotificationItems.reverse().map((item: Models.Item, index: number) => (
               <React.Fragment key={index}>
-                <Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
+                <Components.Item item={item} flat={this.props.flat} showSnackbar={this.showSnackbar} />
               </React.Fragment>
             ))}
-            <Button variant="fab" className={classes.fab} color="primary" onClick={this.toggleNewItemDialog} >
+            <UI.Button variant="fab" className={classes.fab} color="primary" onClick={this.toggleNewItemDialog} >
               <Icons.Add />
-            </Button>
-            <Dialog
+            </UI.Button>
+            <UI.Dialog
               open={this.state.dialogOpen}
               // onClose={this.handleClose}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
               >
-              <DialogTitle id="alert-dialog-title">{"Create New Item"}</DialogTitle>
-              <DialogContent>
+              <UI.DialogTitle id="alert-dialog-title">{"Create New Item"}</UI.DialogTitle>
+              <UI.DialogContent>
                 <div style={{width: 223}}>
-                    <FormControl>
-                    <InputLabel htmlFor="newItemName">Item Name</InputLabel>
-                    <Input
+                    <UI.FormControl>
+                    <UI.InputLabel htmlFor="newItemName">Item Name</UI.InputLabel>
+                    <UI.Input
                       id="newItemName"
                       type="text"
                       required={true}
@@ -87,10 +83,10 @@ class Flat extends React.Component<FlatProps, FlatState> {
                       onChange={this.handleChange}
                       style={{width: 223}}
                       />
-                  </FormControl>
-                  <FormControl>
-                    <InputLabel htmlFor="newItemDesc">Item Description</InputLabel>
-                    <Input
+                  </UI.FormControl>
+                  <UI.FormControl>
+                    <UI.InputLabel htmlFor="newItemDesc">Item Description</UI.InputLabel>
+                    <UI.Input
                       id="newItemDesc"
                       type="text"
                       value={this.state.newItemDesc}
@@ -98,20 +94,20 @@ class Flat extends React.Component<FlatProps, FlatState> {
                       multiline={true}
                       style={{width: 223}}
                       />
-                  </FormControl>
+                  </UI.FormControl>
                 </div>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.toggleNewItemDialog} color="primary">
+              </UI.DialogContent>
+              <UI.DialogActions>
+                <UI.Button onClick={this.toggleNewItemDialog} color="primary">
                   Cancel
-                </Button>
-                <Button onClick={this.createItem} color="primary" autoFocus={true}>
+                </UI.Button>
+                <UI.Button onClick={this.createItem} color="primary" autoFocus={true}>
                   Create
-                </Button>
-              </DialogActions>
-            </Dialog>
+                </UI.Button>
+              </UI.DialogActions>
+            </UI.Dialog>
           </div>
-          <Snackbar
+          <UI.Snackbar
             anchorOrigin={{
               horizontal: 'right',
               vertical: 'bottom',
@@ -123,9 +119,9 @@ class Flat extends React.Component<FlatProps, FlatState> {
               'aria-describedby': 'message-id',
             }}
             message={<span id="message-id">{this.state.snackbarMessage}</span>}
-            TransitionComponent={Fade}
+            TransitionComponent={UI.Fade}
             action={[
-              <IconButton
+              <UI.IconButton
               key="close"
               aria-label="Close"
               color="inherit"
@@ -133,7 +129,7 @@ class Flat extends React.Component<FlatProps, FlatState> {
               onClick={this.hideSnackbar}
               >
                 <Icons.Close />
-              </IconButton>,
+              </UI.IconButton>,
             ]}
             />
         </div>
@@ -143,40 +139,40 @@ class Flat extends React.Component<FlatProps, FlatState> {
       return (
         <div className={classes.flatContainer}>
           <div style={{ width: 327 }}>
-            <ExpansionPanel>
-              <ExpansionPanelSummary expandIcon={<Icons.ExpandMore />}>
-                <Typography variant="headline"> Flat Members </Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+            <UI.ExpansionPanel>
+              <UI.ExpansionPanelSummary expandIcon={<Icons.ExpandMore />}>
+                <UI.Typography variant="headline"> Flat Members </UI.Typography>
+              </UI.ExpansionPanelSummary>
+              <UI.ExpansionPanelDetails>
                   {thisFlat.members.map((member, index) =>
                     <React.Fragment key={index}>
-                      <Chip label={member.username} className={classes.chip} color="primary" />
+                      <UI.Chip label={member.username} className={classes.chip} color="primary" />
                     </React.Fragment>
                   )}
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+              </UI.ExpansionPanelDetails>
+            </UI.ExpansionPanel>
             
             <div className={classes.loadingContainer}>
               <div style={{width: 56.56}}>
-                <CircularProgress color="primary"/>
+                <UI.CircularProgress color="primary"/>
               </div>
             </div>
 
-            <Button variant="fab" className={classes.fab} color="primary" onClick={this.toggleNewItemDialog} >
+            <UI.Button variant="fab" className={classes.fab} color="primary" onClick={this.toggleNewItemDialog} >
               <Icons.Add />
-            </Button>
-            <Dialog
+            </UI.Button>
+            <UI.Dialog
               open={this.state.dialogOpen}
               // onClose={this.handleClose}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
               >
-              <DialogTitle id="alert-dialog-title">{"Create New Item"}</DialogTitle>
-              <DialogContent>
+              <UI.DialogTitle id="alert-dialog-title">{"Create New Item"}</UI.DialogTitle>
+              <UI.DialogContent>
                 <div style={{width: 223}}>
-                    <FormControl>
-                    <InputLabel htmlFor="newItemName">Item Name</InputLabel>
-                    <Input
+                    <UI.FormControl>
+                    <UI.InputLabel htmlFor="newItemName">Item Name</UI.InputLabel>
+                    <UI.Input
                       id="newItemName"
                       type="text"
                       required={true}
@@ -184,10 +180,10 @@ class Flat extends React.Component<FlatProps, FlatState> {
                       onChange={this.handleChange}
                       style={{width: 223}}
                       />
-                  </FormControl>
-                  <FormControl>
-                    <InputLabel htmlFor="newItemDesc">Item Description</InputLabel>
-                    <Input
+                  </UI.FormControl>
+                  <UI.FormControl>
+                    <UI.InputLabel htmlFor="newItemDesc">Item Description</UI.InputLabel>
+                    <UI.Input
                       id="newItemDesc"
                       type="text"
                       value={this.state.newItemDesc}
@@ -195,20 +191,20 @@ class Flat extends React.Component<FlatProps, FlatState> {
                       multiline={true}
                       style={{width: 223}}
                       />
-                  </FormControl>
+                  </UI.FormControl>
                 </div>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.toggleNewItemDialog} color="primary">
+              </UI.DialogContent>
+              <UI.DialogActions>
+                <UI.Button onClick={this.toggleNewItemDialog} color="primary">
                   Cancel
-                </Button>
-                <Button onClick={this.createItem} color="primary" autoFocus={true}>
+                </UI.Button>
+                <UI.Button onClick={this.createItem} color="primary" autoFocus={true}>
                   Create
-                </Button>
-              </DialogActions>
-            </Dialog>
+                </UI.Button>
+              </UI.DialogActions>
+            </UI.Dialog>
           </div>
-          <Snackbar
+          <UI.Snackbar
             anchorOrigin={{
               horizontal: 'right',
               vertical: 'bottom',
@@ -220,9 +216,9 @@ class Flat extends React.Component<FlatProps, FlatState> {
               'aria-describedby': 'message-id',
             }}
             message={<span id="message-id">{this.state.snackbarMessage}</span>}
-            TransitionComponent={Fade}
+            TransitionComponent={UI.Fade}
             action={[
-              <IconButton
+              <UI.IconButton
               key="close"
               aria-label="Close"
               color="inherit"
@@ -230,9 +226,9 @@ class Flat extends React.Component<FlatProps, FlatState> {
               onClick={this.hideSnackbar}
               >
                 <Icons.Close />
-              </IconButton>,
+              </UI.IconButton>,
             ]}
-            />
+          />
         </div>
       );
     }

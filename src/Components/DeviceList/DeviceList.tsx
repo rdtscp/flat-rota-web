@@ -5,21 +5,11 @@ import * as React                                     from 'react';
 import { UAParser }                                   from 'ua-parser-js';
 
 /* Material-UI */
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Fade,
-  IconButton,
-  Snackbar,
-}                                                     from '@material-ui/core';
-import CloseIcon                                      from '@material-ui/icons/Close';
+import * as UI                                        from '@material-ui/core';
+import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
-import Device                                         from 'src/Components/Device';
+import * as Components                                from 'src/Components';
 import * as Models                                    from 'src/Models';
 import utilities                                      from 'src/Resources/utilitiesHelper';
 
@@ -46,36 +36,36 @@ class DeviceList extends React.Component<DeviceListProps, DeviceListState> {
 
     return (
       <div className={classes.devicesContainer}>
-        <Dialog
+        <UI.Dialog
           open={this.state.confirmationAlertOpen}
           onClose={this.cancelConfirmLogoutAlert}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{"Confirm Logout Device"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
+          <UI.DialogTitle id="alert-dialog-title">{"Confirm Logout Device"}</UI.DialogTitle>
+          <UI.DialogContent>
+            <UI.DialogContentText id="alert-dialog-description">
               {this.state.deviceToLogoutString}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.cancelConfirmLogoutAlert} color="primary">
+            </UI.DialogContentText>
+          </UI.DialogContent>
+          <UI.DialogActions>
+            <UI.Button onClick={this.cancelConfirmLogoutAlert} color="primary">
               Cancel
-            </Button>
-            <Button onClick={this.logoutDevice} color="primary" autoFocus={true}>
+            </UI.Button>
+            <UI.Button onClick={this.logoutDevice} color="primary" autoFocus={true}>
               Logout
-            </Button>
-          </DialogActions>
-        </Dialog>
+            </UI.Button>
+          </UI.DialogActions>
+        </UI.Dialog>
         {devices.map((device: Models.Device, index: number) => {
           const lastUsedStr: string  = utilities.unixToDateTime(device.lastUsed);
           const thisDevice:  boolean = (device.authToken === authState.authToken) ? true : false;
           const parsedUA:    string  = this.parseUserAgent(device.userAgent);
           return(
-            <Device key={index} id={device.id} authToken={device.authToken} lastUsed={lastUsedStr} logout={this.openConfirmLogoutAlert} thisDevice={thisDevice} userAgentStr={parsedUA} />
+            <Components.Device key={index} id={device.id} authToken={device.authToken} lastUsed={lastUsedStr} logout={this.openConfirmLogoutAlert} thisDevice={thisDevice} userAgentStr={parsedUA} />
           )
         })}
-        <Snackbar
+        <UI.Snackbar
           anchorOrigin={{
             horizontal: 'left',
             vertical: 'bottom',
@@ -87,17 +77,17 @@ class DeviceList extends React.Component<DeviceListProps, DeviceListState> {
             'aria-describedby': 'message-id',
           }}
           message={<span id="message-id">Device Logged Out</span>}
-          TransitionComponent={Fade}
+          TransitionComponent={UI.Fade}
           action={[
-            <IconButton
+            <UI.IconButton
               key="close"
               aria-label="Close"
               color="inherit"
               className={classes.close}
               onClick={this.closeSnackbar}
             >
-              <CloseIcon />
-            </IconButton>,
+              <Icons.Close />
+            </UI.IconButton>,
           ]}
         />
       </div>

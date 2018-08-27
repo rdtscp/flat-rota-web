@@ -4,8 +4,7 @@
 import * as React from 'react';
 
 /* Material-UI */
-import { Button, Card, CardContent, Dialog, DialogActions, DialogTitle, IconButton, Menu, MenuItem, Typography
-}                                                     from '@material-ui/core';
+import * as UI                                        from '@material-ui/core';
 import * as Icons                                     from '@material-ui/icons';
 
 /* This Project */
@@ -32,44 +31,44 @@ class Item extends React.Component<ItemProps, ItemState> {
 
     const rota = JSON.parse(item.rota);
     return (
-      <Card className={classes.card}>
+      <UI.Card className={classes.card}>
         <div className={classes.itemContainer}>
-          <CardContent className={classes.itemText} onClick={this.toggleContent}>
-            <Typography variant={(this.state.showName) ? "headline" : "subheading"}>{(this.state.showName) ? item.name : item.description}</Typography>
-          </CardContent>
+          <UI.CardContent className={classes.itemText} onClick={this.toggleContent}>
+            <UI.Typography variant={(this.state.showName) ? "headline" : "subheading"}>{(this.state.showName) ? item.name : item.description}</UI.Typography>
+          </UI.CardContent>
           <div className={classes.itemControls}>
-            <IconButton onClick={this.clearItem} aria-label="Mark Bought">
+            <UI.IconButton onClick={this.clearItem} aria-label="Mark Bought">
               <Icons.Done />
-            </IconButton>
-            <IconButton onClick={this.bumpItem} color={(item.notification)? ((currentUser.id === rota[0]) ? "secondary" : "primary") : "default"} aria-label="Notify Runout">
+            </UI.IconButton>
+            <UI.IconButton onClick={this.bumpItem} color={(item.notification)? ((currentUser.id === rota[0]) ? "secondary" : "primary") : "default"} aria-label="Notify Runout">
               <Icons.NotificationsActive />
-            </IconButton>
-            <IconButton aria-label="Item Options" aria-haspopup="true" aria-owns={itemOptsOpen ? 'menu-appbar' : ''}  onClick={this.openItemOptions}>
+            </UI.IconButton>
+            <UI.IconButton aria-label="Item Options" aria-haspopup="true" aria-owns={itemOptsOpen ? 'menu-appbar' : ''}  onClick={this.openItemOptions}>
               <Icons.MoreHoriz />
-            </IconButton>
-            <Menu color="inherit" id="menu-appbar" anchorEl={this.state.anchorEl} anchorOrigin={{ horizontal: 'right', vertical: 'top', }} transformOrigin={{ horizontal: 'right', vertical: 'top', }} open={itemOptsOpen} onClose={this.clickItemOption} >
-              <MenuItem id="updateItem" onClick={this.updateItem}>Update Info</MenuItem>
-              <MenuItem id="deleteItem" onClick={this.toggleDeleteItemDialog}>Delete Item</MenuItem>
-            </Menu>
+            </UI.IconButton>
+            <UI.Menu color="inherit" id="menu-appbar" anchorEl={this.state.anchorEl} anchorOrigin={{ horizontal: 'right', vertical: 'top', }} transformOrigin={{ horizontal: 'right', vertical: 'top', }} open={itemOptsOpen} onClose={this.clickItemOption} >
+              <UI.MenuItem id="updateItem" onClick={this.updateItem}>Update Info</UI.MenuItem>
+              <UI.MenuItem id="deleteItem" onClick={this.toggleDeleteItemDialog}>Delete Item</UI.MenuItem>
+            </UI.Menu>
           </div>
         </div>
-        <Dialog
+        <UI.Dialog
           open={this.state.confirmationDeleteItemOpen}
           onClose={this.toggleDeleteItemDialog}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{"Confirm Delete Item"}</DialogTitle>
-          <DialogActions>
-            <Button onClick={this.toggleDeleteItemDialog} color="primary">
+          <UI.DialogTitle id="alert-dialog-title">{"Confirm Delete Item"}</UI.DialogTitle>
+          <UI.DialogActions>
+            <UI.Button onClick={this.toggleDeleteItemDialog} color="primary">
               Cancel
-            </Button>
-            <Button onClick={this.deleteItem} color="primary" autoFocus={true}>
+            </UI.Button>
+            <UI.Button onClick={this.deleteItem} color="primary" autoFocus={true}>
               Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Card>
+            </UI.Button>
+          </UI.DialogActions>
+        </UI.Dialog>
+      </UI.Card>
     );
   }
 

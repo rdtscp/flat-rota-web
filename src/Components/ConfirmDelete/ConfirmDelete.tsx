@@ -4,15 +4,7 @@
 import * as React                                     from 'react';
 
 /* Material-UI */
-import {
-  Button,
-  Paper,
-  Step,
-  StepContent,
-  StepLabel,
-  Stepper,
-  Typography
-}                                                     from '@material-ui/core';
+import * as UI                                        from '@material-ui/core';
 
 /* This Project */
 import * as Models                                    from 'src/Models';
@@ -37,43 +29,43 @@ class ConfirmDelete extends React.Component<ConfirmDeleteProps, ConfirmDeleteSta
 
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} orientation="vertical">
+        <UI.Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((label, index) => {
             return (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-                <StepContent>
-                  <Typography>{this.getStepContent(index)}</Typography>
+              <UI.Step key={label}>
+                <UI.StepLabel>{label}</UI.StepLabel>
+                <UI.StepContent>
+                  <UI.Typography>{this.getStepContent(index)}</UI.Typography>
                   <div className={classes.actionsContainer}>
                     <div>
-                      <Button
+                      <UI.Button
                         disabled={activeStep === 0}
                         onClick={this.handleBack}
                         className={classes.button}
                       >
                         Back
-                      </Button>
-                      <Button
+                      </UI.Button>
+                      <UI.Button
                         variant="contained"
                         color="primary"
                         onClick={this.handleNext}
                         className={classes.button}
                       >
                         {activeStep === steps.length - 1 ? 'Next' : 'Next'}
-                      </Button>
+                      </UI.Button>
                     </div>
                   </div>
-                </StepContent>
-              </Step>
+                </UI.StepContent>
+              </UI.Step>
             );
           })}
-        </Stepper>
+        </UI.Stepper>
         {activeStep === steps.length && (
-          <Paper square={true} elevation={0} className={classes.resetContainer}>
-            <Button onClick={this.deleteAccount} className={classes.button} color="secondary">
+          <UI.Paper square={true} elevation={0} className={classes.resetContainer}>
+            <UI.Button onClick={this.deleteAccount} className={classes.button} color="secondary">
               Delete Account
-            </Button>
-          </Paper>
+            </UI.Button>
+          </UI.Paper>
         )}
       </div>
     );
