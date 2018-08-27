@@ -16,14 +16,18 @@ interface IAppNavigatorProps {
 }
 
 interface IAppNavigatorState {
-  anchorEl:       HTMLElement | null;
-  activePane:     string;
-  drawerOpen:     boolean;
-  drawerWasOpen:  boolean;
-  flatListOpen:   boolean;
-  settingsOpen:   boolean;
-  snackbarMessage:string;
-  snackbarOpen:   boolean;
+  anchorEl:               HTMLElement | null;
+  activePane:             string;
+  addMembersOpen:         boolean;
+  leaveDeleteAlertOpen:   boolean;
+  leaveDeleteAlertTitle:  string;
+  leaveDeleteAlertType:   string;
+  drawerOpen:             boolean;
+  drawerWasOpen:          boolean;
+  flatListOpen:           boolean;
+  settingsOpen:           boolean;
+  snackbarMessage:        string;
+  snackbarOpen:           boolean;
 }
 
 type AppNavigatorProps = IAppNavigatorProps & IAppNavigatorStyle;

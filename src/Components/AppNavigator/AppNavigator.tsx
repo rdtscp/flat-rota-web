@@ -20,14 +20,18 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
     super(props);
 
     this.state = {
-      activePane:         'yourTodos',
-      anchorEl:           null,
-      drawerOpen:         false,
-      drawerWasOpen:      true,
-      flatListOpen:       false,
-      settingsOpen:       false,
-      snackbarMessage:    '',
-      snackbarOpen:       false,
+      activePane:           'yourTodos',
+      addMembersOpen:       false,
+      anchorEl:             null,
+      drawerOpen:           false,
+      drawerWasOpen:        true,
+      flatListOpen:         false,
+      leaveDeleteAlertOpen: false,
+      leaveDeleteAlertTitle:'',
+      leaveDeleteAlertType: '',
+      settingsOpen:         false,
+      snackbarMessage:      '',
+      snackbarOpen:         false,
     };
   }
 
@@ -103,6 +107,11 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       paneContent = (<Components.Flat flat={currentFlat} />);
     }
 
+    let addMembersForm = <React.Fragment>{/* */}</React.Fragment>
+    if (this.state.addMembersOpen) {
+      addMembersForm = (<Components.AddMembersForm submit={this.reloadApp} cancel={this.toggleAddMembersForm} />);
+    }
+
     return (
       <div className={classes.root}>
         <UI.Slide direction="up" in={settingsOpen} mountOnEnter={true} unmountOnExit={true}>
@@ -120,7 +129,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
             </UI.Typography>
             {(activePane !== 'yourTodos' && activePane !== 'createFlat') ? (
               <React.Fragment>
-                <UI.IconButton color="inherit" onClick={this.addMembersFlat}>
+                <UI.IconButton color="inherit" onClick={this.toggleAddMembersForm}>
                   <Icons.GroupAdd /> 
                 </UI.IconButton>
                 <div>
@@ -180,9 +189,99 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
             </UI.IconButton>,
           ]}
         />
+        {addMembersForm}
+        <UI.Dialog
+          open={this.state.leaveDeleteAlertOpen}
+          onClose={this.cancelLeaveDeleteAlert}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <UI.DialogTitle id="alert-dialog-title">{this.state.leaveDeleteAlertTitle}</UI.DialogTitle>
+          <UI.DialogActions>
+            <UI.Button onClick={this.cancelLeaveDeleteAlert} color="primary">
+              Cancel
+            </UI.Button>
+            <UI.Button onClick={this.confirmLeaveDeleteAlert} color="primary" autoFocus={true}>
+              Logout
+            </UI.Button>
+          </UI.DialogActions>
+        </UI.Dialog>
       </div>
     );
 
+  }
+
+  private confirmLeaveDeleteAlert = () => {
+    if (this.state.leaveDeleteAlertType === 'leave') {
+      this.leaveFlat();
+    }
+    else if (this.state.leaveDeleteAlertType === 'destroy') {
+      this.deleteFlat();
+    }
+  }
+
+  private cancelLeaveDeleteAlert = () => {
+    this.setState({
+      leaveDeleteAlertOpen: false,
+    });
+  }
+
+  private leaveFlat = () => {
+    Models.FlatAPI.leave(this.state.activePane)
+    .then((leaveData: Models.FlatResponseData) => {
+      if (leaveData.message !== null) {
+        this.showSnackbar(leaveData.message);
+      }
+      this.reloadApp()
+    })
+    .catch((leaveData: Models.UserResponseData) => {
+      if (leaveData.message !== null) {
+        this.showSnackbar(leaveData.message);
+      }
+      this.reloadApp()
+    });
+  }
+
+  private deleteFlat = () => {
+    Models.FlatAPI.destroy(this.state.activePane)
+    .then((deleteData: Models.FlatResponseData) => {
+      if (deleteData.message !== null) {
+        this.showSnackbar(deleteData.message);
+      }
+      this.reloadApp()
+    })
+    .catch((deleteData: Models.UserResponseData) => {
+      if (deleteData.message !== null) {
+        this.showSnackbar(deleteData.message);
+      }
+      this.reloadApp()
+    });
+  }
+
+  private clickFlatOption = (event: React.MouseEvent<HTMLElement>) => {
+    if (event.currentTarget.id !== '') {
+      if (event.currentTarget.id === 'leave') {
+        this.setState({
+          leaveDeleteAlertOpen:   true,
+          leaveDeleteAlertTitle:  'Confirm Leave Flat',
+          leaveDeleteAlertType:   'leave',
+        });
+      }
+      else if (event.currentTarget.id === 'destroy') {
+        this.setState({
+          leaveDeleteAlertOpen:   true,
+          leaveDeleteAlertTitle:  'Confirm Delete Flat',
+          leaveDeleteAlertType:   'destroy',
+        });
+      }
+    }      
+    this.setState({ anchorEl: null });
+  }
+
+  private toggleAddMembersForm = () => {
+    this.setState({
+      addMembersOpen: !this.state.addMembersOpen,
+    });
   }
 
   private clickDrawer = (event: React.MouseEvent<HTMLElement>) => {
@@ -202,7 +301,8 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       drawerOpen:     !state.drawerOpen,
       drawerWasOpen:  !state.drawerOpen,
     }));
-  };
+  }
+
   private toggleSettings = () => {
     this.props.setCurrentUserAction();
     if (this.state.settingsOpen === true) {
@@ -225,10 +325,12 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
         settingsOpen:   true,  
       })
     }
-  };
+  }
+
   private closeFlatList = () => {
     this.setState({ flatListOpen: false });
   }
+
   private toggleFlatList = () => {
     const populatedFlats: Array<Promise<Models.Flat | null>> = this.props.currentUser.flats.map((flat: Models.Flat) => 
     Models.FlatAPI.get(flat.id)
@@ -243,68 +345,11 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       flatListOpen: !this.state.flatListOpen
     });
   }
+
   private openFlatOptions = (event: React.MouseEvent<HTMLElement>) => {
     this.setState({
       anchorEl: event.currentTarget
     });
-  }
-
-  private addMembersFlat  = (event: React.MouseEvent<HTMLElement>) => {
-    alert('Popup to Handle Adding Members to Flat: ' + this.state.activePane);
-  }
-  private clickFlatOption = (event: React.MouseEvent<HTMLElement>) => {
-    if (event.currentTarget.id !== '') {
-      if (event.currentTarget.id === 'leave') {
-        Models.FlatAPI.leave(this.state.activePane)
-        .then((leaveData: Models.FlatResponseData) => {
-          if (leaveData.message !== null) {
-            this.showSnackbar(leaveData.message);
-          }
-          this.props.setCurrentUserAction();
-          this.setState({
-            activePane: 'yourTodos',
-            flatListOpen: false,
-          });
-        })
-        .catch((leaveData: Models.UserResponseData) => {
-          if (leaveData.message !== null) {
-            this.showSnackbar(leaveData.message);
-          }
-          this.props.setCurrentUserAction();
-          this.setState({
-            activePane: 'yourTodos',
-            flatListOpen: false,
-          });
-        });
-      }
-      else if (event.currentTarget.id === 'destroy') {
-        Models.FlatAPI.destroy(this.state.activePane)
-        .then((deleteData: Models.FlatResponseData) => {
-          if (deleteData.message !== null) {
-            this.showSnackbar(deleteData.message);
-          }
-          this.props.setCurrentUserAction();
-          this.setState({
-            activePane: 'yourTodos',
-            flatListOpen: false,
-          });
-        })
-        .catch((deleteData: Models.UserResponseData) => {
-          if (deleteData.message !== null) {
-            this.showSnackbar(deleteData.message);
-          }
-          this.props.setCurrentUserAction();
-          this.setState({
-            activePane: 'yourTodos',
-            flatListOpen: false,
-          });
-        });
-      }
-      else {
-        alert('Clicked Flat Option: ' + event.currentTarget.id + ' for flat: ' + this.state.activePane);
-      }
-    }      
-    this.setState({ anchorEl: null });
   }
 
   private showSnackbar = (message: string) => {
@@ -312,13 +357,23 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
       snackbarMessage: message,
       snackbarOpen: true,
     });
-  };
+  }
 
   private hideSnackbar = () => {
     this.setState({
       snackbarOpen: false
     });
-  };
+  }
+
+  private reloadApp = () => {
+    this.props.setCurrentUserAction();
+    this.setState({
+      activePane:           'yourTodos',
+      addMembersOpen:       false,
+      flatListOpen:         false,
+      leaveDeleteAlertOpen: false,
+    });
+  }
   
 }
 
