@@ -202,7 +202,7 @@ class AppNavigator extends React.Component<AppNavigatorProps, AppNavigatorState>
               Cancel
             </UI.Button>
             <UI.Button onClick={this.confirmLeaveDeleteAlert} color="primary" autoFocus={true}>
-              Logout
+              Continue
             </UI.Button>
           </UI.DialogActions>
         </UI.Dialog>
