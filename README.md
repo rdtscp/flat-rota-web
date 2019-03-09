@@ -2,5 +2,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 WebApp for managing communal "todo lists" in shared accommodations.
 
-
 [Live Beta](https://flat-rota.herokuapp.com/)
