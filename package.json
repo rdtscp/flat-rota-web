@@ -10,7 +10,7 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
-    "react-scripts-ts": "2.17.0",
+    "react-scripts-ts": "4.0.8",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "ua-parser-js": "^0.7.18"
